@@ -6,12 +6,12 @@ import { estadosMap } from '../utils/estados';
 function HomePage() {
     const [concursos, setConcursos] = useState([]);
     const [termoBusca, setTermoBusca] = useState('');
-    const [filtroAtivo, setFiltroAtivo] = useState('todos'); // Pode ser 'todos', 'nacional' ou uma sigla de estado
+    const [filtroAtivo, setFiltroAtivo] = useState('todos'); 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);
-        // A API sempre busca todos os dados, o filtro será feito no front-end
+       
         const url = `${import.meta.env.VITE_API_URL}/api/concursos?search=${termoBusca}`;
         
         fetch(url)
@@ -25,8 +25,7 @@ function HomePage() {
                 setLoading(false);
             });
     }, [termoBusca]);
-
-    // --- LÓGICA DE FILTRAGEM E AGRUPAMENTO NO FRONT-END ---
+    
     const concursosFiltrados = concursos.filter(concurso => {
         if (filtroAtivo === 'todos') return true;
         if (filtroAtivo === 'nacional') return concurso.ambito === 'Nacional';
@@ -90,8 +89,7 @@ function HomePage() {
                     </div>
                 </div>
                 {estadosOrdenados.map(estadoSigla => (
-                    <section key={estadoSigla} className="regiao-section">
-                        {/* Usa o mapa para traduzir a sigla. Se não encontrar, usa a própria sigla. */}
+                    <section key={estadoSigla} className="regiao-section">                        
                         <h2>{estadosMap[estadoSigla.toUpperCase()] || estadoSigla}</h2>
                         {concursosPorEstado[estadoSigla].map(concurso => (
                             <ConcursoCard key={concurso._id} concurso={concurso} />
@@ -109,12 +107,7 @@ function HomePage() {
                                 {concursosNacionais.map(concurso => <ConcursoCard key={concurso._id} concurso={concurso} />)}
                             </section>
                         )}
-                       {/*} {estadosOrdenados.map(estado => (
-                            <section key={estado} className="regiao-section">
-                                <h2>{estado}</h2>
-                                {concursosPorEstado[estado].map(concurso => <ConcursoCard key={concurso._id} concurso={concurso} />)}
-                            </section>
-                        ))}*/}
+                       
                     </>
                 )}
                  {!loading && concursosFiltrados.length === 0 && (
@@ -126,7 +119,6 @@ function HomePage() {
     );
 }
 
-
 import React, { useState, useEffect } from 'react';
 import ConcursoCard from '../components/ConcursoCard';
 import { estadosMap } from '../utils/estados';
@@ -134,12 +126,11 @@ import { estadosMap } from '../utils/estados';
 function HomePage() {
     const [concursos, setConcursos] = useState([]);
     const [termoBusca, setTermoBusca] = useState('');
-    const [filtroAtivo, setFiltroAtivo] = useState('todos'); // Pode ser 'todos', 'nacional' ou uma sigla de estado
+    const [filtroAtivo, setFiltroAtivo] = useState('todos'); 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
-        // A API sempre busca todos os dados, o filtro será feito no front-end
+        setLoading(true);        
         const url = `${import.meta.env.VITE_API_URL}/api/concursos?search=${termoBusca}`;
         
         fetch(url)
@@ -152,9 +143,7 @@ function HomePage() {
                 console.error("Erro ao buscar concursos:", error);
                 setLoading(false);
             });
-    }, [termoBusca]);
-
-    // --- LÓGICA DE FILTRAGEM E AGRUPAMENTO NO FRONT-END ---
+    }, [termoBusca]);    
     const concursosFiltrados = concursos.filter(concurso => {
         if (filtroAtivo === 'todos') return true;
         if (filtroAtivo === 'nacional') return concurso.ambito === 'Nacional';
@@ -218,8 +207,7 @@ function HomePage() {
                     </div>
                 </div>
                 {estadosOrdenados.map(estadoSigla => (
-                    <section key={estadoSigla} className="regiao-section">
-                        {/* Usa o mapa para traduzir a sigla. Se não encontrar, usa a própria sigla. */}
+                    <section key={estadoSigla} className="regiao-section">                        
                         <h2>{estadosMap[estadoSigla.toUpperCase()] || estadoSigla}</h2>
                         {concursosPorEstado[estadoSigla].map(concurso => (
                             <ConcursoCard key={concurso._id} concurso={concurso} />
@@ -237,12 +225,7 @@ function HomePage() {
                                 {concursosNacionais.map(concurso => <ConcursoCard key={concurso._id} concurso={concurso} />)}
                             </section>
                         )}
-                       {/*} {estadosOrdenados.map(estado => (
-                            <section key={estado} className="regiao-section">
-                                <h2>{estado}</h2>
-                                {concursosPorEstado[estado].map(concurso => <ConcursoCard key={concurso._id} concurso={concurso} />)}
-                            </section>
-                        ))}*/}
+                       
                     </>
                 )}
                  {!loading && concursosFiltrados.length === 0 && (
