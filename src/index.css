@@ -249,24 +249,3 @@ footer { text-align: center; padding: 25px 0; margin-top: 30px; background-color
         width: 100%;
     }
 }
-/* ================================== */
-/* === ESTILOS PARA O LOGO NO CABEÇALHO === */
-/* ================================== */
-
-/*.logo-container {
-   /* display: flex;            /* A mágica do Flexbox: alinha os itens na horizontal */
-   /* align-items: center;      /* Alinha o logo e o texto verticalmente no centro */
-  /*  gap: 12px;                /* Cria um espaço de 12px entre o logo e o texto */
-  /*  text-decoration: none;    /* Remove o sublinhado padrão dos links */
-/*}
-
-/*.logo-image {
- /*   height: 40px;             /* Define a altura do seu logo */
- /*   width: auto;              /* Mantém a proporção da imagem */
-/*}
-
-/*.logo-text {
-/*    font-size: 1.8rem;        /* Tamanho da fonte para o nome do site */
-/*    font-weight: bold;        /* Deixa o texto em negrito */
- /*   color: #0056b3;           /* Cor do texto, a mesma do nosso H1 antigo */
-/*}
