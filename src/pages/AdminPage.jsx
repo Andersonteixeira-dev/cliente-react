@@ -1,30 +1,26 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminPage() {
     const navigate = useNavigate();
-    
+
     const [concursos, setConcursos] = useState([]); 
-    
     const [loading, setLoading] = useState(true); 
-    
     const [editingId, setEditingId] = useState(null); 
-    
     const [formData, setFormData] = useState({
-        instituicao: '', vagas: '', escolaridade: '', ambito: 'Municipal',
-        salario: '', prazo: '', estado: '', resumo: '', linkEdital: '',  cargos: ''
+        instituicao: '', vagas: '', escolaridade: [], ambito: 'Municipal',
+        salario: '', prazo: '', estado: '', resumo: '', linkEdital: '', cargos: ''
     });
-    
+
     const token = localStorage.getItem('authToken');
-    
+
     useEffect(() => {
         fetchConcursos();
     }, []);
 
     const fetchConcursos = async () => {
         try {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/concursos');
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/concursos`);
             const data = await response.json();
             setConcursos(data);
             setLoading(false);
@@ -33,82 +29,81 @@ function AdminPage() {
             setLoading(false);
         }
     };
-       
+
     const handleInputChange = (e) => {
-    const { id, value } = e.target;
+        const { id, value } = e.target;
+        const novosDados = { ...formData, [id]: value };
+        if (id === 'ambito' && value === 'Nacional') {
+            novosDados.estado = '';
+        }
+        setFormData(novosDados);
+    };
+    
+    const handleEscolaridadeChange = (e) => {
+        const { value, checked } = e.target;
+        const currentEscolaridade = formData.escolaridade || [];
+        let newEscolaridade;
+        if (checked) {
+            newEscolaridade = [...currentEscolaridade, value];
+        } else {
+            newEscolaridade = currentEscolaridade.filter(item => item !== value);
+        }
+        setFormData(prevData => ({ ...prevData, escolaridade: newEscolaridade }));
+    };
 
-    
-    const novosDados = { ...formData, [id]: value };
-
-    
-    if (id === 'ambito' && value === 'Nacional') {
-        
-        novosDados.estado = '';
-    }
-    
-    setFormData(novosDados);
-};    
-    
     const resetarFormulario = () => {
         setEditingId(null);
         setFormData({
             instituicao: '', vagas: '', escolaridade: [], ambito: 'Municipal',
-            salario: '', prazo: '', estado: '', resumo: '', linkEdital: '',  cargos: ''
+            salario: '', prazo: '', estado: '', resumo: '', linkEdital: '', cargos: ''
         });
     };
-    
+
     const handlePreencherFormulario = (concurso) => {
         setEditingId(concurso._id);
         setFormData({
             instituicao: concurso.instituicao, vagas: concurso.vagas, 
             escolaridade: concurso.escolaridade || [], ambito: concurso.ambito,
-            salario: concurso.salario, prazo: concurso.prazo,
+            salario: concurso.salario, prazo: concurso.prazo.substring(0, 10), 
             estado: concurso.estado || '', resumo: concurso.resumo, 
-            linkEdital: concurso.linkEdital,  cargos: ''
+            linkEdital: concurso.linkEdital, cargos: concurso.cargos
         });
-        window.scrollTo(0, 0); 
-    };    
+        window.scrollTo(0, 0);
+    };
 
-const handleSalvar = async (event) => {
-    event.preventDefault();
-    const url = editingId 
-        ? `${import.meta.env.VITE_API_URL}/api/concursos/${editingId}`
-        : '${import.meta.env.VITE_API_URL}/api/concursos';
-    const method = editingId ? 'PUT' : 'POST';
-    
-    const dadosParaEnviar = { ...formData };
-    if (dadosParaEnviar.prazo && dadosParaEnviar.prazo.includes('/')) {
-        const partes = dadosParaEnviar.prazo.split('/');
-        dadosParaEnviar.prazo = `${partes[2]}-${partes[1]}-${partes[0]}`;
-    }    
+    const handleSalvar = async (event) => {
+        event.preventDefault();        
+        const url = editingId 
+            ? `${import.meta.env.VITE_API_URL}/api/concursos/${editingId}`
+            : `${import.meta.env.VITE_API_URL}/api/concursos`;
+        const method = editingId ? 'PUT' : 'POST';
 
-    try {
-        const response = await fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            
-            body: JSON.stringify(dadosParaEnviar) 
-        });
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(formData)
+            });
 
-        const result = await response.json();
-        if (!response.ok) throw new Error(result.message || 'Falha ao salvar.');
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.message || 'Falha ao salvar.');
 
-        alert(result.message);
-        resetarFormulario();
-        fetchConcursos();
+            alert(result.message);
+            resetarFormulario();
+            fetchConcursos();
 
-    } catch (error) {
-        console.error("Erro ao salvar:", error);
-        alert(`Erro: ${error.message}`);
-    }
-};
-    
+        } catch (error) {
+            console.error("Erro ao salvar:", error);
+            alert(`Erro: ${error.message}`);
+        }
+    };
+
     const handleDeletar = async (id) => {
         if (confirm('Tem certeza que deseja deletar este concurso?')) {
-            try {
+            try {                
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/api/concursos/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -116,7 +111,7 @@ const handleSalvar = async (event) => {
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.message || 'Falha ao deletar.');
                 alert(result.message);
-                fetchConcursos(); 
+                fetchConcursos();
             } catch (error) {
                 console.error("Erro ao deletar:", error);
                 alert(`Erro: ${error.message}`);
@@ -128,21 +123,6 @@ const handleSalvar = async (event) => {
         localStorage.removeItem('authToken');
         navigate('/login');
     };
-    const handleEscolaridadeChange = (e) => {
-    const { value, checked } = e.target;
-    const currentEscolaridade = formData.escolaridade || [];
-
-    let newEscolaridade;
-    if (checked) {
-        
-        newEscolaridade = [...currentEscolaridade, value];
-    } else {
-        
-        newEscolaridade = currentEscolaridade.filter(item => item !== value);
-    }
-    
-    setFormData(prevData => ({ ...prevData, escolaridade: newEscolaridade }));
-};
     
     return (
         <div>
