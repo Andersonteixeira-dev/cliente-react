@@ -119,7 +119,17 @@ function DetalhesPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn"
-                         
+                          style={{
+                                    padding: '8px 14px',
+                                    borderRadius: '20px',
+                                    backgroundColor: '#0077cc',
+                                    color: '#fff',
+                                    textDecoration: 'none',
+                                    fontSize: '14px'
+                                    hover {
+                                      background-color: #005fa3;
+                                    }
+                                  }}
                         >
                           {link.nome}
                         </a>
