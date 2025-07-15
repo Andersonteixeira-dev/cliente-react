@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Title, Meta } from 'react-head';
 
 const initialState = {
     instituicao: '', vagas: '', escolaridade: [], ambito: 'Municipal',
@@ -131,11 +131,10 @@ function AdminPage() {
     };
 
     return (
-        <div>
-             <Helmet>
-                <title>Painel de Administração | eConcursou</title>                
-                <meta name="robots" content="noindex, nofollow" />
-            </Helmet>
+        <>
+            <Title>Painel de Administração | eConcursou</Title>
+             <Meta name="robots" content="noindex, nofollow" />
+        <div>            
             <button onClick={handleLogout} className="btn-logout" style={{ float: 'right' }}>Sair <i className="fas fa-sign-out-alt"></i></button>
             <section className="form-section">
                 <h1>{editingId ? 'Editando Concurso' : 'Cadastrar Novo Concurso'}</h1>
@@ -172,6 +171,7 @@ function AdminPage() {
                 )}
             </section>
         </div>
+        </>
     );
 }
 

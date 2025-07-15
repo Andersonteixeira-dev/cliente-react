@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Title, Meta } from 'react-head';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -36,12 +36,10 @@ function LoginPage() {
     };
 
     return (
-        <div>
-              <Helmet>
-                <title>Login - Painel de Administração eConcursou</title>
-                <meta name="robots" content="noindex" /> 
-              </Helmet>
-            
+        <>
+            <Title>Login - Painel de Administração | eConcursou</Title>         
+            <Meta name="robots" content="noindex, nofollow" />
+        <div>             
             <div className="form-container" style={{ maxWidth: '450px', margin: '40px auto' }}>
                 <h1>Acesso Restrito</h1>
                 <form onSubmit={handleLogin}>
@@ -58,7 +56,8 @@ function LoginPage() {
                     <button type="submit" className="btn-submit">Entrar</button>
                 </form>
             </div>
-        </div>   
+        </div>  
+        </> 
     );
 }
 
