@@ -101,11 +101,10 @@ function DetalhesPage() {
             </div>
             </div>
             <div className="resumo-section">
-                  <h3>Documentos e Links Importantes</h3>
+                  <h3>Resumo do Edital e Links</h3>
                 
                   {concurso.resumo && (
                     <>
-                      <h4>Resumo do Edital</h4>
                       <p style={{ whiteSpace: 'pre-wrap' }}>{concurso.resumo}</p>
                     </>
                   )}
@@ -118,20 +117,8 @@ function DetalhesPage() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="btn"
-                          style={{
-                                    padding: '8px 14px',
-                                    borderRadius: '20px',
-                                    backgroundColor: '#0077cc',
-                                    color: '#fff',
-                                    textDecoration: 'none',
-                                    fontSize: '14px'
-                                        transition: background-color 0.3s ease;
-                                    hover {
-                                      background-color: #005fa3;
-                                    }
-                                  }}
-                        >
+                          className="btn-detalhes"
+                          >
                           {link.nome}
                         </a>
                       ))}
