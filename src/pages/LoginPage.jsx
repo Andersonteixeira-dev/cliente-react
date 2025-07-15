@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -35,21 +36,29 @@ function LoginPage() {
     };
 
     return (
-        <div className="form-container" style={{ maxWidth: '450px', margin: '40px auto' }}>
-            <h1>Acesso Restrito</h1>
-            <form onSubmit={handleLogin}>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Senha</label>
-                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-                {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-                <button type="submit" className="btn-submit">Entrar</button>
-            </form>
-        </div>
+        <div>
+              <Helmet>
+                <title>Login - Painel de Administração eConcursou</title>
+                <meta name="robots" content="noindex" /> 
+              </Helmet>
+            
+            <div className="form-container" style={{ maxWidth: '450px', margin: '40px auto' }}>
+                <h1>Acesso Restrito</h1>
+                <form onSubmit={handleLogin}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="password">Senha</label>
+                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+                    <button type="submit" className="btn-submit">Entrar</button>
+                </form>
+            </div>
+        </div>   
     );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function verificarStatus(dataPrazo) {
     if (!dataPrazo)   return { texto: 'Previsto', classe: 'previsto' };
@@ -86,10 +87,16 @@ function DetalhesPage() {
     const statusInfo = verificarStatus(concurso.prazo);
 
     return (
-        <div className="concurso-detalhe-card">
+        <div>
+             <Helmet>       
+                    <title>{`Concurso ${concurso.instituicao} - eConcursou`}</title>
+                    <meta name="description" content={`Detalhes sobre o concurso público para ${concurso.instituicao}. Vagas para ${concurso.cargos || 'diversos cargos'}. Salário de até ${concurso.salario}.`} />
+                </Helmet>
+            <div className="concurso-detalhe-card">
             <div className="card-header">
                 <h4>{concurso.instituicao}</h4>
                 <span className={`status ${statusInfo.classe}`}>{statusInfo.texto}</span>
+            </div>
             </div>
             <div className="card-body">
                 <div className="info-item-detalhe"><strong><i className="fas fa-briefcase"></i> Vagas:</strong> {concurso.vagas}</div>

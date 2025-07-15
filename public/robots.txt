@@ -1,0 +1,8 @@
+# Arquivo: cliente-react/public/robots.txt
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /login
+
+Sitemap: https://www.econcursou.com.br/sitemap.xml

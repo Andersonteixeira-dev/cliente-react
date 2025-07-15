@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ConcursoCard from '../components/ConcursoCard';
 import { estadosMap } from '../utils/estados';
 
@@ -46,6 +47,10 @@ function HomePage() {
 
     return (
         <div>
+               <Helmet>
+                    <title>eConcursou - Concursos Públicos Abertos e Previstos</title>
+                    <meta name="description" content="Encontre os últimos editais de concursos públicos abertos, previstos e em andamento em todo o Brasil. Vagas para todos os níveis de escolaridade." />
+                </Helmet>
             <section className="filtro-estados">
                     <input
                     type="text"
