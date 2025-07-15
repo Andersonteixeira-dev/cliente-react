@@ -101,21 +101,42 @@ function DetalhesPage() {
             </div>
             </div>
             <div className="resumo-section">
-                <h3>Documentos e Links Importantes</h3>
-                {concurso.links && concurso.links.length > 0 ? (
-                    <ul className="lista-links-publica">
-                        {(concurso.links || []).map((link, index) => (
-                            <li key={index}>
-                                <a href={link.url} className="btn-detalhes-principal" target="_blank" rel="noopener noreferrer">
-                                    <i className="fas fa-file-pdf"></i> {link.nome}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
+                  <h3>Documentos e Links Importantes</h3>
+                
+                  {concurso.resumo && (
+                    <>
+                      <h4>Resumo do Edital</h4>
+                      <p style={{ whiteSpace: 'pre-wrap' }}>{concurso.resumo}</p>
+                    </>
+                  )}
+                
+                  {concurso.links && concurso.links.length > 0 ? (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '15px' }}>
+                      {concurso.links.map((link, index) => (
+                        <a
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn"
+                          style={{
+                            padding: '8px 14px',
+                            borderRadius: '20px',
+                            backgroundColor: '#0077cc',
+                            color: '#fff',
+                            textDecoration: 'none',
+                            fontSize: '14px'
+                          }}
+                        >
+                          {link.nome}
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
                     <p>Nenhum link de edital foi fornecido.</p>
-                )}
-            </div>
+                  )}
+                </div>
+
         </div>
     );
 }
