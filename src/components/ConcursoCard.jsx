@@ -88,25 +88,15 @@ function ConcursoCard({ concurso }) {
                         <i className="fas fa-calendar-days"></i>
                         <strong>Inscrições até:</strong> {formatarData(concurso.prazo)}
                     </div>
-                )}
-
-                {/* ... */}
+                )}               
                 <div className="card-footer">
-                    {/* SÓ MOSTRA O BOTÃO SE O CAMPO 'linkEdital' EXISTIR */}
-                    {concurso.linkEdital ? (
-                        <Link to={`/concursos/${concurso._id}`} className="btn-detalhes">
-                            Ver Detalhes e Edital
-                        </Link>
-                    ) : (
-                        <span className="sem-edital">Edital não disponível</span>
-                    )}
-                </div>
-                
-            </div>
-            
+                    <Link to={`/concursos/${concurso._id}`} className="btn-detalhes">
+                        Ver Detalhes
+                    </Link>
+                </div>                
+            </div>            
         </article>
     );
 }
-
 
 export default ConcursoCard;

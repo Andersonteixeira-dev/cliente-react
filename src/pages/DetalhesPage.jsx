@@ -101,17 +101,22 @@ function DetalhesPage() {
             </div>
             </div>
             <div className="resumo-section">
-                <h3>Resumo do Edital</h3>
-                <p style={{ whiteSpace: 'pre-wrap' }}>{concurso.resumo || 'Nenhum resumo disponível.'}</p>
-            </div>
-            <div className="card-footer-detalhe">
-                <a href={concurso.linkEdital || '#'} className="btn-detalhes-principal" target="_blank" rel="noopener noreferrer">
-                    <i className="fas fa-file-pdf"></i> Ver Edital Completo (PDF)
-                </a>
+                <h3>Documentos e Links Importantes</h3>
+                {concurso.links && concurso.links.length > 0 ? (
+                    <ul className="lista-links-publica">
+                        {(concurso.links || []).map((link, index) => (
+                            <li key={index}>
+                                <a href={link.url} className="btn-detalhes-principal" target="_blank" rel="noopener noreferrer">
+                                    <i className="fas fa-file-pdf"></i> {link.nome}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Nenhum link de edital foi fornecido.</p>
+                )}
             </div>
         </div>
     );
 }
-
-
 export default DetalhesPage;
