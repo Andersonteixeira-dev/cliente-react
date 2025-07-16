@@ -114,9 +114,7 @@ function HomePage() {
 
                 <div className="lista-concursos">
                     {loading ? <p>Carregando...</p> : (
-                        <>
-                            {concursosFiltrados.length === 0 && <p className="aviso-lista-vazia">Nenhum concurso encontrado para os filtros selecionados.</p>}
-                            
+                        <>                       
                             {nacionais.length > 0 && (
                                 <section className="regiao-section"><h2>Nacional</h2>{nacionais.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
                             )}
