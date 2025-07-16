@@ -6,7 +6,7 @@ import { Title, Meta } from 'react-head';
 function HomePage() {
     const [concursos, setConcursos] = useState([]);
     const [termoBusca, setTermoBusca] = useState('');
-    const [filtroEstado, setFiltroEstado] = useState('todos');
+     const [filtroAtivo, setFiltroAtivo] = useState('todos');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
