@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Title, Meta } from 'react-head';
 import ConcursoCard from '../components/ConcursoCard';
 import { estadosMap } from '../utils/estados';
+import { Title, Meta } from 'react-head';
 
 function HomePage() {
     const [concursos, setConcursos] = useState([]);
     const [termoBusca, setTermoBusca] = useState('');
-    const [filtroAtivo, setFiltroAtivo] = useState('todos'); 
+    const [filtroEstado, setFiltroEstado] = useState('todos');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
-       
+        setLoading(true);       
         const url = `${import.meta.env.VITE_API_URL}/api/concursos?search=${termoBusca}`;
         
         fetch(url)
@@ -25,24 +24,33 @@ function HomePage() {
                 setLoading(false);
             });
     }, [termoBusca]);
+
+    // --- LÓGICA DE FILTRAGEM E ORDENAÇÃO CUSTOMIZADA NO FRONT-END ---
     
+    // 1. Aplica o filtro de estado selecionado
     const concursosFiltrados = concursos.filter(concurso => {
-        if (filtroAtivo === 'todos') return true;
-        if (filtroAtivo === 'nacional') return concurso.ambito === 'Nacional';
-        return concurso.estado === filtroAtivo;
+        if (filtroEstado === 'todos') return true;
+        if (filtroEstado === 'nacional') return concurso.ambito === 'Nacional';
+        return concurso.estado === filtroEstado;
     });
 
-    const concursosNacionais = concursosFiltrados.filter(c => c.ambito === 'Nacional');
-    const concursosPorEstado = concursosFiltrados
-        .filter(c => c.ambito !== 'Nacional')
+    // 2. Separa os concursos em grupos com base na nossa regra de negócio
+    const nacionais = concursosFiltrados.filter(c => c.ambito === 'Nacional').sort((a, b) => a.instituicao.localeCompare(b.instituicao));
+    const sp = concursosFiltrados.filter(c => c.estado === 'sp').sort((a, b) => a.instituicao.localeCompare(b.instituicao));
+    const sudeste = concursosFiltrados.filter(c => ['rj', 'mg', 'es'].includes(c.estado)).sort((a, b) => a.instituicao.localeCompare(b.instituicao));
+    
+    // Agrupa os outros estados
+    const outrosEstados = concursosFiltrados
+        .filter(c => c.ambito !== 'Nacional' && !['sp', 'rj', 'mg', 'es'].includes(c.estado))
         .reduce((acc, concurso) => {
             const estado = concurso.estado.toUpperCase();
             if (!acc[estado]) acc[estado] = [];
             acc[estado].push(concurso);
             return acc;
         }, {});
+    
+    const siglasOutrosEstados = Object.keys(outrosEstados).sort();
 
-    const estadosOrdenados = Object.keys(concursosPorEstado).sort();
 
     return (
         <>
@@ -103,14 +111,36 @@ function HomePage() {
 
             <div className="lista-concursos">
                 {loading ? <p>Carregando...</p> : (
-                    <>
-                        {concursosNacionais.length > 0 && (
+                    <>                        
+                        {nacionais.length > 0 && (
                             <section className="regiao-section">
                                 <h2>Nacional</h2>
-                                {concursosNacionais.map(concurso => <ConcursoCard key={concurso._id} concurso={concurso} />)}
+                                {nacionais.map(c => <ConcursoCard key={c._id} concurso={c} />)}
                             </section>
                         )}
-                       
+                        
+                        {sp.length > 0 && (
+                            <section className="regiao-section">
+                                <h2>São Paulo</h2>
+                                {sp.map(c => <ConcursoCard key={c._id} concurso={c} />)}
+                            </section>
+                        )}                        
+                        
+                        {sudeste.length > 0 && (
+                            <section className="regiao-section">
+                                <h2>Sudeste (RJ, MG, ES)</h2>
+                                {sudeste.map(c => <ConcursoCard key={c._id} concurso={c} />)}
+                            </section>
+                        )}
+                        
+                        {siglasOutrosEstados.map(sigla => (
+                             <section key={sigla} className="regiao-section">
+                                <h2>{estadosMap[sigla] || sigla}</h2>
+                                {outrosEstados[sigla]
+                                    .sort((a,b) => a.instituicao.localeCompare(b.instituicao))
+                                    .map(c => <ConcursoCard key={c._id} concurso={c} />)}
+                            </section>
+                        ))}
                     </>
                 )}
                  {!loading && concursosFiltrados.length === 0 && (
@@ -118,7 +148,7 @@ function HomePage() {
                  )}
             </div>
         </div>
-      </>  
+        </>
     );
 }
 
