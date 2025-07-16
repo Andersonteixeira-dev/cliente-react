@@ -53,7 +53,7 @@ function HomePage() {
                     <input
                     type="text"
                     className="search-input"
-                    placeholder="Pesquisar por instituição..."
+                    placeholder="Buscar por cargo, instituição ou nível escolar..."
                     value={termoBusca}
                     onChange={(e) => setTermoBusca(e.target.value)}
                 />
