@@ -1,32 +1,55 @@
+/* ============================================== */
+/* === ARQUIVO CSS FINAL E CONSOLIDADO - eConcursou === */
+/* ============================================== */
+
 /* --- Reset Básico e Configurações Globais --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; }
 .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 a { text-decoration: none; color: #007bff; }
 
-/* --- Cabeçalho --- */
+/* --- Cabeçalho e Logo --- */
 header { background-color: #ffffff; padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
 header .container { display: flex; justify-content: space-between; align-items: center; }
-header h1 { font-size: 1.8rem; color: #0056b3; }
-header nav ul { list-style: none; display: flex; gap: 20px; }
-header nav a { color: #555; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: background-color 0.3s, color 0.3s; }
-header nav a:hover { background-color: #e9ecef; color: #000; }
-header nav a.active { background-color: #007bff; color: #fff; }
+.logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-image { height: 40px; width: auto; }
+.logo-text { font-size: 1.8rem; font-weight: bold; color: #0056b3; }
+header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 
-/* --- Filtro de Estados --- */
+/* --- Filtros --- */
 .filtro-estados { background-color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
-.filtro-estados h2 { font-size: 1.4rem; margin-bottom: 15px; text-align: center; }
-.mapa-brasil { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+.search-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;}
+.mapa-brasil { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 .mapa-brasil .regiao { display: flex; align-items: center; gap: 8px; background-color: #f8f9fa; padding: 8px 12px; border-radius: 6px; flex-wrap: wrap; }
 .mapa-brasil .regiao strong { color: #333; font-weight: 500; }
 .filtro-btn { padding: 6px 10px; color: #007bff; font-weight: bold; border-radius: 4px; border: 1px solid #007bff; transition: all 0.3s ease; }
 .filtro-btn:hover { background-color: #007bff; color: #fff; }
 .filtro-btn.active { background-color: #0056b3; border-color: #0056b3; color: #fff; }
 
-/* --- Lista de Concursos --- */
+/* --- Títulos de Seção (Nacional, São Paulo, etc.) --- */
+.regiao-section h2 {
+    font-size: 1.4rem;
+    color: #343a40;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+}
+
+/* --- Mensagem de Lista Vazia --- */
 .aviso-lista-vazia { text-align: center; padding: 40px 20px; background-color: #fff; border-radius: 8px; }
+
+/* --- CARDS DE CONCURSO (SEÇÃO ATUALIZADA E FINAL) --- */
+
+/* Wrapper do Link: remove a aparência padrão de link */
+.card-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Estilo principal do card */
 .concurso-card {
-    background-color: #f8f9fa; /* Um cinza muito claro, quase branco */
+    background-color: #ffffff;
     border: 1px solid #dee2e6;
     border-left: 5px solid #0d6efd; /* Destaque azul na lateral */
     border-radius: 8px;
@@ -34,225 +57,140 @@ header nav a.active { background-color: #007bff; color: #fff; }
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .concurso-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Cabeçalho do card */
 .concurso-card .card-header {
     padding: 15px 20px;
     border-bottom: 1px solid #e9ecef;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 15px;
+    align-items: center;
 }
 
 .concurso-card .card-header h4 {
-    color: #003d82; /* Azul escuro para o título */
-    font-size: 1.2rem;
+    color: #003d82;
+    font-size: 1.1rem;
     margin: 0;
 }
-/* Novo layout para o corpo do card */
+
+/* Corpo do Card com layout de 2 colunas */
 .concurso-card .card-body {
     padding: 20px;
-    display: flex;
-    flex-direction: column; /* Itens ficarão um embaixo do outro */
-    gap: 12px; /* Espaçamento entre os itens */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
+    gap: 12px 25px; /* Espaçamento vertical e horizontal */
+    font-size: 0.9rem;
 }
 
-/* Cada item de informação agora é um container Flexbox */
-.concurso-card .info-item {
+.info-item {
     display: flex;
-    align-items: center; /* Alinha o ícone com o texto */
-    text-align: left;
+    align-items: flex-start;
+    gap: 8px;
 }
 
-.concurso-card .info-item i {
+.info-item i {
     color: #0d6efd;
-    font-size: 1.1rem;
+    margin-top: 3px;
+    width: 20px;
     text-align: center;
-    width: 25px; /* Largura fixa para o ícone */
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
 }
 
-/* O texto do item (label e valor) */
-.concurso-card .info-item strong {
+.info-item strong {
+    font-weight: 600;
+    color: #343a40;
+    white-space: nowrap;
+}
+
+.info-item span {
     color: #495057;
+}
+
+/* Faz o campo "Cargos" ocupar as duas colunas */
+.info-item-full {
+    grid-column: 1 / -1;
+}
+
+.prazo-final span {
+    color: #d9534f;
     font-weight: 500;
-    margin-right: 8px; /* Espaço depois do label (ex: "Vagas:") */
 }
 
-.concurso-card .card-footer {
-    padding: 15px 20px;
-    background-color: #f8f9fa;
-    text-align: right;
-    border-top: 1px solid #e9ecef;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.status { padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; color: #fff; white-space: nowrap; }
-.status.aberto { background-color: #20c997; } /* Verde mais vibrante */
-.status.encerrado { background-color: #6c757d; }
+/* Estilos para os Status Tags */
+.status { padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; color: #fff; white-space: nowrap; }
+.status.aberto { background-color: #198754; }
+.status.encerrado { background-color: #6c7d87; }
 .status.previsto { background-color: #ffc107; color: #333; }
-.card-body { padding: 20px; display: grid; gap: 15px; grid-template-columns: 1fr 1fr; }
-.info-item { display: flex; align-items: center; gap: 10px; color: #555; }
-.info-item i { color: #007bff; width: 20px; text-align: center; }
-.info-item strong { color: #333; margin-right: 5px; }
-.prazo-final { color: #d9534f; font-weight: 500; }
-.card-footer { background-color: #f8f9fa; padding: 15px 20px; text-align: right; border-top: 1px solid #eee; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
-.btn-detalhes { background-color: #007bff; color: #fff; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
-.btn-detalhes:hover { background-color: #0056b3; }
-.btn-detalhes.disabled { background-color: #adb5bd; cursor: not-allowed; }
 
-/* Botão de Deletar */
-.btn-delete { position: absolute; top: 10px; right: 10px; background-color: #dc3545; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; font-size: 16px; font-weight: bold; line-height: 25px; text-align: center; cursor: pointer; opacity: 0.4; transition: all 0.2s; }
-.concurso-card:hover .btn-delete { opacity: 1; }
-
-/* --- Rodapé --- */
-footer { text-align: center; padding: 25px 0; margin-top: 30px; background-color: #343a40; color: #f8f9fa; }
-
-/* --- Responsividade --- */
-@media (max-width: 768px) {
-    header .container { flex-direction: column; gap: 15px; }
-    header nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .card-body { grid-template-columns: 1fr; }
-}
-/* ======== ESTILOS PARA A PÁGINA DE ADMINISTRAÇÃO ======== */
-.admin-body { background-color: #e9ecef; }
-.admin-container { max-width: 800px; margin: 30px auto; padding: 20px; }
-
-.form-section, .gerenciamento-section {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+/* Estilos para Cards Encerrados */
+.concurso-card.encerrado {
+    border-left-color: #6c7d87; /* Muda a cor da tarja para cinza */
+    opacity: 0.75;
 }
 
-.gerenciamento-section { margin-top: 40px; }
-.gerenciamento-section h2 { margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-
-.item-admin {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
+.concurso-card.encerrado:hover {
+    transform: none; /* Remove o efeito de 'levantar' */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: default;
 }
-.item-admin:last-child { border-bottom: none; }
 
-.item-info strong { font-size: 1.1rem; color: #333; }
-.item-info span { font-size: 0.9rem; color: #777; margin-left: 10px; }
-
-.item-acoes { display: flex; gap: 10px; }
-.btn-editar, .btn-deletar-admin {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-.btn-editar { background-color: #007bff; }
-.btn-deletar-admin { background-color: #dc3545; }
-.btn-editar:hover, .btn-deletar-admin:hover { opacity: 0.8; }
-
-.btn-cancelar {
-    display: inline-block;
-    width: 100%;
-    margin-top: 10px;
-    padding: 15px;
-    background-color: #6c757d;
-    color: #fff;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-/* Estilos para a página de detalhes */
+/* --- ESTILOS PARA PÁGINA DE DETALHES --- */
+/* (Incluídos aqui para manter tudo junto) */
 .concurso-detalhe-card { background-color: #fff; border-radius: 8px; padding: 25px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
 .info-item-detalhe { font-size: 1.1rem; margin-bottom: 15px; }
 .info-item-detalhe strong { color: #333; }
 .info-item-detalhe i { margin-right: 10px; color: #007bff; }
 .resumo-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
 .resumo-section h3 { margin-bottom: 15px; }
-.resumo-section p {
-    white-space: pre-wrap;
-    word-wrap: break-word;   
-    overflow-wrap: break-word; 
-}
-.card-footer-detalhe { text-align: center; margin-top: 30px; }
-.btn-detalhes-principal { background-color: #dc3545; color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 1.2rem; font-weight: bold; text-decoration: none; display: inline-block; transition: background-color 0.3s; }
-.btn-detalhes-principal:hover { background-color: #c82333; }
-.btn-logout { float: right; margin-bottom: 20px; background: #6c757d; color: white; padding: 8px 15px; border-radius: 5px; border: none; cursor: pointer; }
-.btn-logout:hover { background: #5a6268; }
+.resumo-section p { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
+.lista-links-publica { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.btn-detalhes-principal { background-color: #198754; color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 1.2rem; font-weight: bold; text-decoration: none; display: inline-block; transition: background-color 0.3s; }
+.btn-detalhes-principal:hover { background-color: #157347; }
 
-.search-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;}
-.sem-edital {
-    font-style: italic;
-    color: #6c757d;
-    font-size: 0.9rem;
-}
-/* ============================================== */
-/* === ESTILOS PARA DISPOSITIVOS MÓVEIS (RESPONSIVIDADE) === */
-/* ============================================== */
-
-/* Estas regras serão aplicadas em telas com largura máxima de 768px */
-@media (max-width: 768px) {
-
-    /* Ajusta o cabeçalho para empilhar o logo e a navegação */
-    header .container {
-        flex-direction: column;
-        gap: 15px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    /* Diminui um pouco o título principal */
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    /* Garante que os botões de filtro fiquem centralizados */
-    .mapa-brasil .regiao {
-        justify-content: center;
-    }
-    
-    /* Diminui o título das seções (Nacional, São Paulo, etc) */
-    .regiao-section h2 {
-        font-size: 1.3rem;
-    }
-
-    /* O ajuste mais importante: empilha o título e o status do concurso */
-    .concurso-card .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    /* Ajusta o layout do corpo do card para coluna única em telas pequenas */
-    .concurso-card .card-body {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    /* Garante que o botão no rodapé do card ocupe toda a largura */
-    .concurso-card .card-footer {
-        text-align: center;
-    }
-
-    .concurso-card .btn-detalhes {
-        display: block;
-        width: 100%;
-    }
-}
+/* --- ESTILOS GERAIS DE ADMIN E OUTROS --- */
+/* (Estilos que já tínhamos, agora consolidados e limpos) */
+.admin-body { background-color: #e9ecef; }
+.admin-container { max-width: 800px; margin: 30px auto; padding: 20px; }
+.form-section, .gerenciamento-section { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.gerenciamento-section { margin-top: 40px; }
+.gerenciamento-section h2 { margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+.checkbox-group { display: flex; gap: 20px; flex-wrap: wrap; }
+.item-admin { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
+.item-admin:last-child { border-bottom: none; }
+.item-info strong { font-size: 1.1rem; color: #333; }
+.item-acoes { display: flex; gap: 10px; }
+.btn-editar, .btn-deletar-admin { padding: 8px 12px; border: none; border-radius: 5px; color: #fff; cursor: pointer; transition: opacity 0.3s; }
+.btn-editar { background-color: #007bff; }
+.btn-deletar-admin { background-color: #dc3545; }
+.btn-editar:hover, .btn-deletar-admin:hover { opacity: 0.8; }
+.btn-cancelar, .btn-submit { display: block; width: 100%; margin-top: 10px; padding: 15px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-align: center; }
+.btn-submit { background-color: #198754; color: #fff; }
+.btn-cancelar { background-color: #6c757d; color: #fff; }
 .lista-links-admin { margin-bottom: 10px; }
 .item-link-admin { display: flex; justify-content: space-between; align-items: center; background: #e9ecef; padding: 5px 10px; border-radius: 4px; margin-bottom: 5px; }
 .item-link-admin button { background: #dc3545; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; cursor: pointer; }
 .add-link-form { display: flex; gap: 10px; }
 .add-link-form input { flex-grow: 1; }
 .btn-add-link { padding: 0 15px; background: #198754; color: white; border: none; border-radius: 4px; cursor: pointer; }
-.lista-links-publica { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.btn-logout { float: right; margin-bottom: 20px; background: #6c757d; color: white; padding: 8px 15px; border-radius: 5px; border: none; cursor: pointer; }
+.btn-logout:hover { background: #5a6268; }
+
+/* --- RESPONSIVIDADE FINAL --- */
+@media (max-width: 768px) {
+    header .container { flex-direction: column; gap: 15px; padding-top: 15px; padding-bottom: 15px; }
+    header h1, .logo-text { font-size: 1.5rem; }
+    .mapa-brasil .regiao { justify-content: center; }
+    .regiao-section h2 { font-size: 1.3rem; }
+    .concurso-card .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    /* Desfaz as 2 colunas do card no mobile */
+    .concurso-card .card-body {
+        grid-template-columns: 1fr;
+    }
+}
