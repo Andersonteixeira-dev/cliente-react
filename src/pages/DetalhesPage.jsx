@@ -2,32 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Title, Meta } from 'react-head';
 
-function verificarStatus(dataInicio, dataPrazo) {
-    // Se não tiver data de início ou de fim, é considerado Previsto.
-    if (!dataInicio || !dataPrazo) {
-        return { texto: 'Previsto', classe: 'previsto' };
-    }
+function verificarStatus(dataPrazo) {
+    // Se não tiver prazo, nunca ficará "Encerrado", pode ser "Aberto" ou "Previsto"
+    if (!dataPrazo) return { texto: 'Aberto', classe: 'aberto' };
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-
-    const inicio = new Date(dataInicio + 'T00:00:00');
     const prazo = new Date(dataPrazo + 'T00:00:00');
 
-    if (isNaN(inicio.getTime()) || isNaN(prazo.getTime())) {
-        return { texto: 'Inválida', classe: 'encerrado' };
-    }
-
-    if (hoje < inicio) {
-        // Se a data de hoje é ANTES da data de início
-        return { texto: 'Previsto', classe: 'previsto' };
-    } else if (hoje > prazo) {
-        // Se a data de hoje é DEPOIS do prazo final
-        return { texto: 'Encerrado', classe: 'encerrado' };
-    } else {
-        // Se a data de hoje está ENTRE o início e o fim
-        return { texto: 'Aberto', classe: 'aberto' };
-    }
+    return hoje > prazo 
+        ? { texto: 'Encerrado', classe: 'encerrado' }
+        : { texto: 'Aberto', classe: 'aberto' };
 }
 
 function formatarData(dataString) {

@@ -4,7 +4,7 @@ import { Title, Meta } from 'react-head';
 
 const initialState = {
     instituicao: '', vagas: '', escolaridade: [], ambito: 'Municipal',
-    salario: '', prazo: '', dataInicioInscricao: '', estado: '', resumo: '', cargos: '', links: []
+    salario: '', prazo: '', textoInscricao: '', estado: '', resumo: '', cargos: '', links: []
 };
 
 function AdminPage() {
@@ -68,8 +68,8 @@ function AdminPage() {
             instituicao: concurso.instituicao || '', vagas: concurso.vagas || '', 
             escolaridade: concurso.escolaridade || [], ambito: concurso.ambito || 'Municipal',
             salario: concurso.salario || '', prazo: concurso.prazo ? concurso.prazo.substring(0, 10) : '',
-            dataInicioInscricao: concurso.dataInicioInscricao ? concurso.dataInicioInscricao.substring(0, 10) : '', estado: concurso.estado || '', resumo: concurso.resumo || '', 
-            cargos: concurso.cargos || '', links: concurso.links || []
+            estado: concurso.estado || '', resumo: concurso.resumo || '', 
+            cargos: concurso.cargos || '', textoInscricao: concurso.textoInscricao || '', links: concurso.links || []
         });
         window.scrollTo(0, 0);
     };
@@ -147,8 +147,25 @@ function AdminPage() {
                     <div className="form-group"><label htmlFor="ambito">Âmbito do Concurso</label><select id="ambito" value={formData.ambito} onChange={handleInputChange} required><option value="Municipal">Municipal</option><option value="Estadual">Estadual</option><option value="Nacional">Nacional</option></select></div>
                     <div className="form-group"><label htmlFor="estado">Sigla do Estado</label><input type="text" id="estado" value={formData.estado} onChange={handleInputChange} disabled={formData.ambito === 'Nacional'} required={formData.ambito !== 'Nacional'} maxLength="2" /></div>
                     <div className="form-group"><label htmlFor="salario">Salário</label><input type="text" id="salario" value={formData.salario} onChange={handleInputChange} /></div>
-                    <div className="form-group"><label htmlFor="dataInicioInscricao">Início das Inscrições</label><input type="date" id="dataInicioInscricao" value={formData.dataInicioInscricao} onChange={handleInputChange} /></div>
-                    <div className="form-group"><label htmlFor="prazo">Prazo Final de Inscrição</label><input type="date" id="prazo" value={formData.prazo} onChange={handleInputChange} /></div>
+                    <div className="form-group">
+                        <label htmlFor="textoInscricao">Texto de Inscrição (visível no card)</label>
+                        <input 
+                            type="text" 
+                            id="textoInscricao" 
+                            value={formData.textoInscricao || ''} 
+                            onChange={handleInputChange}
+                            placeholder="Ex: Inscrições até 30/09/2025"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="prazo">Data Final (para o sistema mudar o status para 'Encerrado')</label>
+                        <input 
+                            type="date" 
+                            id="prazo" 
+                            value={formData.prazo || ''} 
+                            onChange={handleInputChange} 
+                        />
+                    </div>
                     <div className="form-group"><label htmlFor="resumo">Resumo do Concurso</label><textarea id="resumo" rows="5" value={formData.resumo} onChange={handleInputChange}></textarea></div>
                     <div className="form-group"><label>Links (Edital, Anexos, etc.)</label><div className="lista-links-admin">{(formData.links || []).map((link, index) => (<div key={index} className="item-link-admin"><span>{link.nome} ({link.url})</span><button type="button" onClick={() => handleRemoverLink(index)}>&times;</button></div>))}</div><div className="add-link-form"><input type="text" placeholder="Nome do Link" value={novoLinkNome} onChange={(e) => setNovoLinkNome(e.target.value)} /><input type="url" placeholder="URL do Link" value={novoLinkUrl} onChange={(e) => setNovoLinkUrl(e.target.value)} /><button type="button" onClick={handleAdicionarLink} className="btn-add-link">Adicionar Link</button></div></div>
                     <button type="submit" className="btn-submit">{editingId ? 'Salvar Alterações' : 'Adicionar Concurso'}</button>

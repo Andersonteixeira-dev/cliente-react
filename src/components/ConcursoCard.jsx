@@ -2,32 +2,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 
-function verificarStatus(dataInicio, dataPrazo) {
-    // Se não tiver data de início ou de fim, é considerado Previsto.
-    if (!dataInicio || !dataPrazo) {
-        return { texto: 'Previsto', classe: 'previsto' };
-    }
+function verificarStatus(dataPrazo) {
+    // Se não tiver prazo, nunca ficará "Encerrado", pode ser "Aberto" ou "Previsto"
+    if (!dataPrazo) return { texto: 'Aberto', classe: 'aberto' };
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-
-    const inicio = new Date(dataInicio + 'T00:00:00');
     const prazo = new Date(dataPrazo + 'T00:00:00');
 
-    if (isNaN(inicio.getTime()) || isNaN(prazo.getTime())) {
-        return { texto: 'Inválida', classe: 'encerrado' };
-    }
-
-    if (hoje < inicio) {
-        // Se a data de hoje é ANTES da data de início
-        return { texto: 'Previsto', classe: 'previsto' };
-    } else if (hoje > prazo) {
-        // Se a data de hoje é DEPOIS do prazo final
-        return { texto: 'Encerrado', classe: 'encerrado' };
-    } else {
-        // Se a data de hoje está ENTRE o início e o fim
-        return { texto: 'Aberto', classe: 'aberto' };
-    }
+    return hoje > prazo 
+        ? { texto: 'Encerrado', classe: 'encerrado' }
+        : { texto: 'Aberto', classe: 'aberto' };
 }
 
 
@@ -106,15 +91,13 @@ function ConcursoCard({ concurso }) {
                                 <span>{concurso.salario}</span>
                             </div>
                         </div>
-                        {concurso.prazo && (
-                            <div className="info-item prazo-final">
-                                <i className="fas fa-calendar-days"></i>
-                                <div>
-                                    <strong>Inscrições até: </strong>
-                                    <span>{formatarData(concurso.prazo)}</span>
-                                </div>
-                            </div>
-                        )}
+                        {concurso.textoInscricao && (
+                        <div className="info-item prazo-final">
+                            <i className="fas fa-calendar-days"></i>
+                            <strong>Inscrições:</strong>
+                            <span>{concurso.textoInscricao}</span>
+                        </div>
+                    )}
                     </div>
                 </div>
             </article>

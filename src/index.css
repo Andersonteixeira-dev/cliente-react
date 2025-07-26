@@ -141,20 +141,18 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 /* --- ESTILOS PARA PÁGINA DE DETALHES --- */
 .concurso-detalhe-card { background-color: #fff; border-radius: 8px; padding: 25px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
 .info-item-detalhe {
-    display: flex; /* Ativa o Flexbox */
-    align-items: flex-start; /* Alinha os itens pelo topo */
+    display: flex;
+    align-items: flex-start;
     font-size: 1.1rem;
     margin-bottom: 15px;
-    gap: 10px; /* Espaço entre o ícone e o texto */
+    gap: 10px;
 }
-
 .info-item-detalhe i {
     color: #007bff;
-    margin-top: 5px; 
+    margin-top: 5px;
     width: 20px;
     text-align: center;
 }
-
 .info-item-detalhe strong {
     font-weight: 600;
     color: #333;
@@ -162,28 +160,23 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 .resumo-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
 .resumo-section h3 { margin-bottom: 15px; }
 .resumo-section p { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
-.lista-links-publica { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.lista-links-publica { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
 .btn-detalhes-principal {
-    display: inline-block; /* Garante que o link se comporte como um bloco para aceitar padding */
-    background-color: #198754; /* Um verde de sucesso, convidativo */
+    display: inline-block;
+    background-color: #0d6efd; /* Azul principal */
     color: #fff;
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 6px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none;
-    transition: background-color 0.3s, transform 0.2s;
-    border: none;
-    text-align: center;
+    transition: background-color 0.2s;
 }
-
 .btn-detalhes-principal:hover {
-    background-color: #157347; /* Um verde um pouco mais escuro no hover */
-    transform: translateY(-2px); /* Efeito de 'levantar' sutil */
+    background-color: #0b5ed7; /* Azul mais escuro */
 }
-
 .btn-detalhes-principal i {
-    margin-right: 8px; /* Espaço entre o ícone do PDF e o texto */
+    margin-right: 8px;
 }
 .resumo-formatado {
     white-space: pre-wrap;
