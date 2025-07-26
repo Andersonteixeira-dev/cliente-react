@@ -2,25 +2,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 
-function verificarStatus(dataPrazo) {
-    if (!dataPrazo)   return { texto: 'Previsto', classe: 'previsto' };
-
-    let dataISO = dataPrazo;
-    
-    if (dataPrazo.includes('/')) {
-        const partes = dataPrazo.split('/');
-        dataISO = `${partes[2]}-${partes[1]}-${partes[0]}`;
+function verificarStatus(dataInicio, dataPrazo) {
+    // Se não tiver data de início ou de fim, é considerado Previsto.
+    if (!dataInicio || !dataPrazo) {
+        return { texto: 'Previsto', classe: 'previsto' };
     }
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-    const prazo = new Date(dataISO + 'T00:00:00');
-    
-    if (isNaN(prazo.getTime())) return { texto: 'Inválida', classe: 'encerrado' };
 
-    return hoje > prazo 
-        ? { texto: 'Encerrado', classe: 'encerrado' }
-        : { texto: 'Aberto', classe: 'aberto' };
+    const inicio = new Date(dataInicio + 'T00:00:00');
+    const prazo = new Date(dataPrazo + 'T00:00:00');
+
+    if (isNaN(inicio.getTime()) || isNaN(prazo.getTime())) {
+        return { texto: 'Inválida', classe: 'encerrado' };
+    }
+
+    if (hoje < inicio) {
+        // Se a data de hoje é ANTES da data de início
+        return { texto: 'Previsto', classe: 'previsto' };
+    } else if (hoje > prazo) {
+        // Se a data de hoje é DEPOIS do prazo final
+        return { texto: 'Encerrado', classe: 'encerrado' };
+    } else {
+        // Se a data de hoje está ENTRE o início e o fim
+        return { texto: 'Aberto', classe: 'aberto' };
+    }
 }
 
 
@@ -55,7 +62,7 @@ function formatarData(dataString) {
 }
 
 function ConcursoCard({ concurso }) {    
-    const statusInfo = verificarStatus(concurso.prazo);   
+    const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.prazo);   
 
     return (
          <Link to={`/concursos/${concurso._id}`} className="card-link-wrapper">           
@@ -70,7 +77,7 @@ function ConcursoCard({ concurso }) {
                         <div className="info-item">
                             <i className="fas fa-graduation-cap"></i>
                             <div>
-                                <strong>Escolaridade:</strong>
+                                <strong>Escolaridade: </strong>
                                 <span>{(concurso.escolaridade || []).join(' / ')}</span>
                             </div>
                         </div>
@@ -78,7 +85,7 @@ function ConcursoCard({ concurso }) {
                             <div className="info-item">
                                 <i className="fas fa-user-tie"></i>
                                 <div>
-                                    <strong>Cargos:</strong>
+                                    <strong>Cargos: </strong>
                                     <span>{concurso.cargos}</span>
                                 </div>
                             </div>
@@ -88,14 +95,14 @@ function ConcursoCard({ concurso }) {
                         <div className="info-item">
                             <i className="fas fa-briefcase"></i>
                             <div>
-                                <strong>Vagas:</strong>
+                                <strong>Vagas: </strong>
                                 <span>{concurso.vagas}</span>
                             </div>
                         </div>
                         <div className="info-item">
                             <i className="fas fa-dollar-sign"></i>
                             <div>
-                                <strong>Salário:</strong>
+                                <strong>Salário: </strong>
                                 <span>{concurso.salario}</span>
                             </div>
                         </div>
@@ -103,7 +110,7 @@ function ConcursoCard({ concurso }) {
                             <div className="info-item prazo-final">
                                 <i className="fas fa-calendar-days"></i>
                                 <div>
-                                    <strong>Inscrições até:</strong>
+                                    <strong>Inscrições até: </strong>
                                     <span>{formatarData(concurso.prazo)}</span>
                                 </div>
                             </div>
