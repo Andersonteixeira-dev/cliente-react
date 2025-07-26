@@ -32,20 +32,34 @@ function HomePage() {
         return concurso.estado === filtroAtivo;
     });
 
-    const nacionais = concursosFiltrados.filter(c => c.ambito === 'Nacional').sort((a, b) => a.instituicao.localeCompare(b.instituicao));
-    const sp = concursosFiltrados.filter(c => c.estado === 'sp').sort((a, b) => a.instituicao.localeCompare(b.instituicao));
-    const sudeste = concursosFiltrados.filter(c => ['rj', 'mg', 'es'].includes(c.estado)).sort((a, b) => a.instituicao.localeCompare(b.instituicao));
-    
-    const outrosEstados = concursosFiltrados
-        .filter(c => c.ambito !== 'Nacional' && !['sp', 'rj', 'mg', 'es'].includes(c.estado))
+    // 1. Separa os concursos Nacionais e ordena
+    const nacionais = concursosFiltrados
+        .filter(c => c.ambito === 'Nacional')
+        .sort((a, b) => a.instituicao.localeCompare(b.instituicao));
+
+    // 2. Agrupa TODOS os outros concursos por estado
+    const concursosPorEstado = concursosFiltrados
+        .filter(c => c.ambito !== 'Nacional')
         .reduce((acc, concurso) => {
             const estado = concurso.estado.toUpperCase();
             if (!acc[estado]) acc[estado] = [];
             acc[estado].push(concurso);
             return acc;
         }, {});
+
+    // 3. Define a nossa ORDEM DE EXIBIÇÃO customizada
+    const ordemDeExibicao = [
+        'SP', 'RJ', 'MG', 'ES', // Sudeste primeiro, com SP na frente
+        // Adicione aqui outras siglas em qualquer ordem de prioridade que desejar
+    ];
+
+    // Pega todas as siglas de estados que temos, remove as que já estão na ordem customizada, e ordena o resto alfabeticamente
+    const siglasRestantes = Object.keys(concursosPorEstado)
+        .filter(sigla => !ordemDeExibicao.includes(sigla))
+        .sort();
     
-    const siglasOutrosEstados = Object.keys(outrosEstados).sort();
+    // Junta a nossa ordem prioritária com o resto dos estados
+    const todasAsSiglasOrdenadas = [...ordemDeExibicao, ...siglasRestantes];
 
     return (
         <>
@@ -118,23 +132,22 @@ function HomePage() {
                             {nacionais.length > 0 && (
                                 <section className="regiao-section"><h2>Nacional</h2>{nacionais.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
                             )}
-                            {sp.length > 0 && (
-                                <section className="regiao-section"><h2>São Paulo</h2>{sp.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
-                            )}
-                            {sudeste.length > 0 && (
-                                <section className="regiao-section"><h2>Sudeste (RJ, MG, ES)</h2>{sudeste.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
-                            )}
-                            {siglasOutrosEstados.map(sigla => (
+                            {todasAsSiglasOrdenadas.map(sigla => (
+                             // Verifica se realmente existem concursos para essa sigla antes de criar a seção
+                               concursosPorEstado[sigla] && (
                                  <section key={sigla} className="regiao-section">
-                                    <h2>{estadosMap[sigla.toUpperCase()] || sigla}</h2>
-                                    {outrosEstados[sigla].sort((a,b) => a.instituicao.localeCompare(b.instituicao)).map(c => <ConcursoCard key={c._id} concurso={c} />)}
-                                </section>
-                            ))}
-                        </>
-                    )}
-                    {!loading && concursosFiltrados.length === 0 && (
-                    <p className="aviso-lista-vazia">Nenhum concurso encontrado para os filtros selecionados.</p>
-                )}
+                                     <h2>{estadosMap[sigla] || sigla}</h2>
+                                     {concursosPorEstado[sigla]
+                                     .sort((a, b) => a.instituicao.localeCompare(b.instituicao))
+                                     .map(c => <ConcursoCard key={c._id} concurso={c} />)}
+                                    </section>
+                                  )
+                               ))}
+                          </>
+                        )}
+                       {!loading && concursosFiltrados.length === 0 && (
+                          <p className="aviso-lista-vazia">Nenhum concurso encontrado para os filtros selecionados.</p>
+                       )}
                 </div>
             </div>
         </>
