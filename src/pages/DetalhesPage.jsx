@@ -3,16 +3,31 @@ import { useParams, Link } from 'react-router-dom';
 import { Title, Meta } from 'react-head';
 
 function verificarStatus(dataPrazo) {
-    // Se não tiver prazo, nunca ficará "Encerrado", pode ser "Aberto" ou "Previsto"
-    if (!dataPrazo) return { texto: 'Aberto', classe: 'aberto' };
+    // Se não houver data de prazo, consideramos como 'Previsto' ou 'Aberto'
+    // para não penalizar o concurso. A lógica de "Previsto" com base na data de início foi removida para simplificar.
+    if (!dataPrazo) {
+        return { texto: 'Aberto', classe: 'aberto' }; 
+    }
 
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    const prazo = new Date(dataPrazo + 'T00:00:00');
+    hoje.setHours(0, 0, 0, 0); // Zera o horário para comparar apenas o dia
 
-    return hoje > prazo 
-        ? { texto: 'Encerrado', classe: 'encerrado' }
-        : { texto: 'Aberto', classe: 'aberto' };
+    // Converte a string 'YYYY-MM-DD' para um objeto Date de forma segura
+    const partesPrazo = dataPrazo.split('-').map(Number);
+    const prazo = new Date(partesPrazo[0], partesPrazo[1] - 1, partesPrazo[2]);
+    prazo.setHours(0, 0, 0, 0);
+
+    // Se a data do prazo for inválida, retorna um status neutro
+    if (isNaN(prazo.getTime())) {
+        return { texto: 'Aberto', classe: 'aberto' };
+    }
+
+    // A comparação final: o status é 'Encerrado' apenas se 'hoje' for estritamente maior que o 'prazo'
+    if (hoje > prazo) {
+        return { texto: 'Encerrado', classe: 'encerrado' };
+    } else {
+        return { texto: 'Aberto', classe: 'aberto' };
+    }
 }
 
 function formatarData(dataString) {
@@ -76,60 +91,79 @@ function DetalhesPage() {
         );
     }
     
-    const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.prazo);
+   const statusInfo = verificarStatus(concurso.prazo);
 
     return (
-         <>
-      <Title>{`Concurso ${concurso.instituicao} | eConcursou`}</Title>
-      <Meta name="description" content={`Detalhes sobre o concurso para ${concurso.instituicao}. Vagas para ${concurso.cargos || 'diversos cargos'}.`} />
-        <div>             
-            <div className="concurso-detalhe-card">
+    <>
+        {/* Bloco de SEO (já estava correto) */}
+        <Title>{`Concurso ${concurso.instituicao} | eConcursou`}</Title>
+        <Meta name="description" content={`Detalhes sobre o concurso para ${concurso.instituicao}. Vagas para ${concurso.cargos || 'diversos cargos'}.`} />
+
+        {/* O container principal do card */}
+        <div className="concurso-detalhe-card">
+            
+            {/* Cabeçalho */}
             <div className="card-header">
                 <h4>{concurso.instituicao}</h4>
                 <span className={`status ${statusInfo.classe}`}>{statusInfo.texto}</span>
             </div>
-            </div>
-            <div className="card-body">
-                <div className="info-item-detalhe"><strong><i className="fas fa-briefcase"></i> Vagas:</strong> {concurso.vagas}</div>
-                <div className="info-item-detalhe"><strong>Escolaridade:</strong> {concurso.escolaridade.join(' / ')}</div>
-                <div className="info-item-detalhe"><strong><i className="fas fa-dollar-sign"></i> Salário:</strong> {concurso.salario}</div>
-                <div className="info-item prazo-final">
-                <i className="fas fa-calendar-days"></i>
-                <strong>Inscrições até:</strong> {formatarData(concurso.prazo)}
-            </div>
-            </div>
-            <div className="resumo-section">
-                  <h3>Resumo do Edital e Links</h3>
-                
-                  {concurso.resumo && (
-                    <>
-                      <div 
-                        className="resumo-formatado" 
-                        dangerouslySetInnerHTML={{ __html: concurso.resumo || 'Nenhum resumo disponível.' }}/>
-                    </>
-                  )}
-                
-                  {concurso.links && concurso.links.length > 0 ? (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '15px' }}>
-                      {concurso.links.map((link, index) => (
-                        <a
-                          key={index}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-detalhes"
-                          >
-                          {link.nome}
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <p>Nenhum link de edital foi fornecido.</p>
-                  )}
+
+            {/* Corpo com as informações principais (AGORA DENTRO DO CARD) */}
+            <div className="card-body-detalhes" style={{ paddingTop: '20px' }}>
+                <div className="info-item-detalhe">
+                    <i className="fas fa-briefcase"></i>
+                    <div><strong>Vagas: </strong><span>{concurso.vagas}</span></div>
                 </div>
+                <div className="info-item-detalhe">
+                    <i className="fas fa-graduation-cap"></i>
+                    <div><strong>Escolaridade: </strong><span>{(concurso.escolaridade || []).join(' / ')}</span></div>
+                </div>
+                {concurso.cargos && (
+                    <div className="info-item-detalhe">
+                        <i className="fas fa-user-tie"></i>
+                        <div><strong>Cargos: </strong><span>{concurso.cargos}</span></div>
+                    </div>
+                )}
+                <div className="info-item-detalhe">
+                    <i className="fas fa-dollar-sign"></i>
+                    <div><strong>Salário: </strong><span>{concurso.salario}</span></div>
+                </div>
+                {concurso.prazo && (
+                    <div className="info-item-detalhe">
+                        <i className="fas fa-calendar-days"></i>
+                        <div><strong>{concurso.textoInscricao ? 'Inscrições:' : 'Inscrições até:'} </strong><span>{concurso.textoInscricao || formatarData(concurso.prazo)}</span></div>
+                    </div>
+                )}
+            </div>
+
+            {/* Seção de Resumo e Links (AGORA DENTRO DO CARD) */}
+            <div className="resumo-section">
+                <h3>Resumo do Edital</h3>
+                <div 
+                    className="resumo-formatado" 
+                    dangerouslySetInnerHTML={{ __html: concurso.resumo || 'Nenhum resumo disponível.' }}
+                />
+            </div>
+
+            <div className="resumo-section">
+                <h3>Documentos e Links Importantes</h3>
+                {(concurso.links && concurso.links.length > 0) ? (
+                    <ul className="lista-links-publica">
+                        {concurso.links.map((link, index) => (
+                            <li key={index}>
+                                <a href={link.url} className="btn-detalhes-principal" target="_blank" rel="noopener noreferrer">
+                                    <i className="fas fa-file-pdf"></i> {link.nome}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Nenhum link fornecido.</p>
+                )}
+            </div>
 
         </div>
-        </>
-    );
+    </>
+   );
 }
 export default DetalhesPage;

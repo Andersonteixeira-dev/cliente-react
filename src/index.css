@@ -160,23 +160,35 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 .resumo-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
 .resumo-section h3 { margin-bottom: 15px; }
 .resumo-section p { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
-.lista-links-publica { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.lista-links-publica {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
+    gap: 10px; /* Espaço entre os botões */
+}
+
 .btn-detalhes-principal {
     display: inline-block;
-    background-color: #0d6efd; /* Azul principal */
+    background-color: #198754; /* Verde para uma ação positiva */
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 6px;
     font-size: 1rem;
     font-weight: 500;
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
+    border: none;
+    text-align: center;
 }
+
 .btn-detalhes-principal:hover {
-    background-color: #0b5ed7; /* Azul mais escuro */
+    background-color: #157347; /* Verde mais escuro no hover */
+    transform: translateY(-2px); /* Efeito sutil de "levantar" */
 }
+
 .btn-detalhes-principal i {
-    margin-right: 8px;
+    margin-right: 8px; /* Espaço entre o ícone do PDF e o texto */
 }
 .resumo-formatado {
     white-space: pre-wrap;
@@ -212,7 +224,14 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 .btn-add-link { padding: 0 15px; background: #198754; color: white; border: none; border-radius: 4px; cursor: pointer; }
 .btn-logout { float: right; margin-bottom: 20px; background: #6c757d; color: white; padding: 8px 15px; border-radius: 5px; border: none; cursor: pointer; }
 .btn-logout:hover { background: #5a6268; }
-
+/* --- Rodapé --- */
+footer {
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+    background-color: #343a40; /* Fundo cinza escuro */
+    color: #f8f9fa;           /* Texto claro */
+}
 /* --- RESPONSIVIDADE FINAL --- */
 @media (max-width: 768px) {
     header .container { flex-direction: column; gap: 15px; padding-top: 15px; padding-bottom: 15px; }

@@ -3,16 +3,31 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 
 function verificarStatus(dataPrazo) {
-    // Se não tiver prazo, nunca ficará "Encerrado", pode ser "Aberto" ou "Previsto"
-    if (!dataPrazo) return { texto: 'Aberto', classe: 'aberto' };
+    // Se não houver data de prazo, consideramos como 'Previsto' ou 'Aberto'
+    // para não penalizar o concurso. A lógica de "Previsto" com base na data de início foi removida para simplificar.
+    if (!dataPrazo) {
+        return { texto: 'Aberto', classe: 'aberto' }; 
+    }
 
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    const prazo = new Date(dataPrazo + 'T00:00:00');
+    hoje.setHours(0, 0, 0, 0); // Zera o horário para comparar apenas o dia
 
-    return hoje > prazo 
-        ? { texto: 'Encerrado', classe: 'encerrado' }
-        : { texto: 'Aberto', classe: 'aberto' };
+    // Converte a string 'YYYY-MM-DD' para um objeto Date de forma segura
+    const partesPrazo = dataPrazo.split('-').map(Number);
+    const prazo = new Date(partesPrazo[0], partesPrazo[1] - 1, partesPrazo[2]);
+    prazo.setHours(0, 0, 0, 0);
+
+    // Se a data do prazo for inválida, retorna um status neutro
+    if (isNaN(prazo.getTime())) {
+        return { texto: 'Aberto', classe: 'aberto' };
+    }
+
+    // A comparação final: o status é 'Encerrado' apenas se 'hoje' for estritamente maior que o 'prazo'
+    if (hoje > prazo) {
+        return { texto: 'Encerrado', classe: 'encerrado' };
+    } else {
+        return { texto: 'Aberto', classe: 'aberto' };
+    }
 }
 
 
@@ -47,7 +62,7 @@ function formatarData(dataString) {
 }
 
 function ConcursoCard({ concurso }) {    
-    const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.prazo);   
+   const statusInfo = verificarStatus(concurso.prazo);  
 
     return (
          <Link to={`/concursos/${concurso._id}`} className="card-link-wrapper">           
