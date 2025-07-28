@@ -1,78 +1,58 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
-function verificarStatus(dataPrazo) {
-    // Se não houver data de prazo, consideramos como 'Previsto' ou 'Aberto'
-    // para não penalizar o concurso. A lógica de "Previsto" com base na data de início foi removida para simplificar.
-    if (!dataPrazo) {
-        return { texto: 'Aberto', classe: 'aberto' }; 
-    }
-
+function verificarStatus(dataInicio, dataFim) {
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0); // Zera o horário para comparar apenas o dia
+    hoje.setHours(0, 0, 0, 0);
 
-    // Converte a string 'YYYY-MM-DD' para um objeto Date de forma segura
-    const partesPrazo = dataPrazo.split('-').map(Number);
-    const prazo = new Date(partesPrazo[0], partesPrazo[1] - 1, partesPrazo[2]);
-    prazo.setHours(0, 0, 0, 0);
-
-    // Se a data do prazo for inválida, retorna um status neutro
-    if (isNaN(prazo.getTime())) {
-        return { texto: 'Aberto', classe: 'aberto' };
+    // Regra 1: Se tem data final e ela já passou, está Encerrado.
+    if (dataFim) {
+        const fim = new Date(dataFim + 'T00:00:00');
+        if (!isNaN(fim.getTime()) && hoje > fim) {
+            return { texto: 'Encerrado', classe: 'encerrado' };
+        }
     }
 
-    // A comparação final: o status é 'Encerrado' apenas se 'hoje' for estritamente maior que o 'prazo'
-    if (hoje > prazo) {
-        return { texto: 'Encerrado', classe: 'encerrado' };
-    } else {
-        return { texto: 'Aberto', classe: 'aberto' };
+    // Regra 2: Se tem data de início e ela ainda não chegou, está Previsto.
+    if (dataInicio) {
+        const inicio = new Date(dataInicio + 'T00:00:00');
+        if (!isNaN(inicio.getTime()) && hoje < inicio) {
+            return { texto: 'Previsto', classe: 'previsto' };
+        }
     }
+
+    // Regra 3: Se não se encaixa em nenhuma das anteriores, está Aberto.
+    return { texto: 'Aberto', classe: 'aberto' };
 }
-
-
 
 function formatarData(dataString) {
     if (!dataString) return 'Data não definida';
 
-    let data;
+    const partes = dataString.split('-').map(Number);
+    const data = new Date(Date.UTC(partes[0], partes[1] - 1, partes[2]));
 
-    
-    if (dataString.includes('/')) {
-        
-        const partes = dataString.split('/');
-        
-        const dataISO = `${partes[2]}-${partes[1]}-${partes[0]}`;
-        data = new Date(dataISO + 'T00:00:00');
-    } else {
-        
-        data = new Date(dataString + 'T00:00:00');
-    }
-
-    
     if (isNaN(data.getTime())) {
         return 'Formato de data irreconhecível';
     }
-    
-    const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); 
-    const ano = data.getFullYear();
+
+    const dia = String(data.getUTCDate()).padStart(2, '0');
+    const mes = String(data.getUTCMonth() + 1).padStart(2, '0');
+    const ano = data.getUTCFullYear();
 
     return `${dia}/${mes}/${ano}`;
 }
 
-function ConcursoCard({ concurso }) {    
-   const statusInfo = verificarStatus(concurso.prazo);  
-
+function ConcursoCard({ concurso }) { 
+    const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.dataFimInscricao);
     return (
-         <Link to={`/concursos/${concurso._id}`} className="card-link-wrapper">           
+         <Link to={`/concursos/${concurso._id}`} className="card-link-wrapper"> 
             <article className={`concurso-card ${statusInfo.classe}`}>
                 <div className="card-header">
                     <h4>{concurso.instituicao}</h4>
                     <span className={`status ${statusInfo.classe}`}>{statusInfo.texto}</span>
                 </div>
 
-                <div className="card-body">                    
+                <div className="card-body"> 
                     <div className="info-coluna">
                         <div className="info-item">
                             <i className="fas fa-graduation-cap"></i>
@@ -90,7 +70,7 @@ function ConcursoCard({ concurso }) {
                                 </div>
                             </div>
                         )}
-                    </div>                    
+                    </div> 
                     <div className="info-coluna">
                         <div className="info-item">
                             <i className="fas fa-briefcase"></i>
