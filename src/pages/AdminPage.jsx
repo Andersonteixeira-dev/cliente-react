@@ -109,12 +109,7 @@ function AdminPage() {
     };
 
     const handleSalvar = async (event) => {
-<<<<<<< HEAD
         event.preventDefault();         
-=======
-        event.preventDefault();
-         
->>>>>>> ae329d5c653eee0ac2d0a4c5a9e79aacb80ea59c
         const url = editingId ? `${import.meta.env.VITE_API_URL}/api/concursos/${editingId}` : `${import.meta.env.VITE_API_URL}/api/concursos`;
         const method = editingId ? 'PUT' : 'POST';
         try {
