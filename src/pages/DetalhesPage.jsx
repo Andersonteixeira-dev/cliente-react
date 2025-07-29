@@ -46,12 +46,12 @@ function formatarData(dataString) {
 }
 
 function DetalhesPage() {
-    const { id } = useParams();
+    const { slug } = useParams();
     const [concurso, setConcurso] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/concursos/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/concursos/slug/${slug}`)
             .then(res => res.json())
             .then(data => {
                 setConcurso(data);
@@ -61,7 +61,7 @@ function DetalhesPage() {
                 console.error("Erro ao buscar detalhes:", err);
                 setLoading(false);
             });
-    }, [id]);
+    }, [slug]);
 
     if (loading) {
         return <p>Carregando detalhes...</p>;

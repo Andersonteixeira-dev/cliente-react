@@ -45,7 +45,7 @@ function formatarData(dataString) {
 function ConcursoCard({ concurso }) { 
     const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.dataFimInscricao);
     return (
-         <Link to={`/concursos/${concurso._id}`} className="card-link-wrapper"> 
+         <Link to={`/concursos/${concurso.slug}`} className="card-link-wrapper"> 
             <article className={`concurso-card ${statusInfo.classe}`}>
                 <div className="card-header">
                     <h4>{concurso.instituicao}</h4>

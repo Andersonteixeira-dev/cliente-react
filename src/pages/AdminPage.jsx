@@ -109,8 +109,7 @@ function AdminPage() {
     };
 
     const handleSalvar = async (event) => {
-        event.preventDefault();
-         console.log("PROVA #1 - FRONT-END ENVIANDO:", JSON.stringify(formData, null, 2));
+        event.preventDefault();         
         const url = editingId ? `${import.meta.env.VITE_API_URL}/api/concursos/${editingId}` : `${import.meta.env.VITE_API_URL}/api/concursos`;
         const method = editingId ? 'PUT' : 'POST';
         try {

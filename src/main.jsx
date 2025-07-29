@@ -16,11 +16,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HeadProvider>
     <BrowserRouter>
-      <Routes>
-        
+      <Routes>        
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} /> 
-          <Route path="concursos/:id" element={<DetalhesPage />} />
+           <Route path="concursos/:slug" element={<DetalhesPage />} />          
           <Route path="login" element={<LoginPage />} /> 
           <Route 
             path="admin" 
