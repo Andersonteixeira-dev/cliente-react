@@ -257,23 +257,24 @@ footer {
     margin-bottom: 10px;
     line-height: 1.7;
 }
-/* Em src/index.css */
 .footer-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    flex-direction: column; 
+    align-items: center;    
+    gap: 10px;              
 }
+
 .footer-links {
     display: flex;
     gap: 15px;
     align-items: center;
 }
+
 .footer-links a {
     color: #f8f9fa;
     text-decoration: none;
 }
+
 .footer-links a:hover {
     text-decoration: underline;
 }
