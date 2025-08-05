@@ -10,7 +10,7 @@ function PoliticaPrivacidadePage() {
 
             <div className="static-page-card">
     <h1>Política de Privacidade</h1>
-    <p><strong>Última atualização:</strong> [04 de Agosto de 2025]</p>
+    <p><strong>Última atualização:</strong> 04 de Agosto de 2025</p>
     
     <p>
         A sua privacidade é de suma importância para o eConcursou. Esta política de privacidade descreve os tipos de informações pessoais que coletamos e recebemos quando você utiliza o site www.econcursou.com.br, bem como as práticas que utilizamos para proteger essas informações, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
@@ -18,7 +18,7 @@ function PoliticaPrivacidadePage() {
 
     <h2>1. Controlador dos Dados</h2>
     <p>
-        O eConcursou, acessível em www.econcursou.com.br, é o controlador dos dados coletados. Para qualquer questão relacionada a esta política, por favor, entre em contato pelo e-mail: <strong>[econcursou-contato@hotmail.com]</strong>.
+        O eConcursou, acessível em www.econcursou.com.br, é o controlador dos dados coletados. Para qualquer questão relacionada a esta política, por favor, entre em contato pelo e-mail: <strong>econcursou-contato@hotmail.com</strong>.
     </p>
 
     <h2>2. Dados que Coletamos</h2>
