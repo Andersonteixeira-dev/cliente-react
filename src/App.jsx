@@ -17,7 +17,7 @@ function App() {
             </main>
 
             <footer>
-                <div className="container">
+                 <div className="container footer-content">
                     <p>&copy; 2025 eConcursou. Todos os direitos reservados.</p>
                 <div className="footer-links">
                     <Link to="/sobre">Sobre Nós</Link>
