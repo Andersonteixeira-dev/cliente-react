@@ -226,11 +226,34 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 .btn-logout:hover { background: #5a6268; }
 /* --- Rodapé --- */
 footer {
-    text-align: center;
-    padding: 25px 0;
+    text-align: center; 
+    padding: 25px 20px; 
     margin-top: 40px;
-    background-color: #343a40; /* Fundo cinza escuro */
-    color: #f8f9fa;           /* Texto claro */
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    gap: 10px;              
+}
+
+.footer-links {
+    display: flex;
+    gap: 15px; 
+    align-items: center;
+}
+
+.footer-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }
 /* --- RESPONSIVIDADE FINAL --- */
 @media (max-width: 768px) {
@@ -256,25 +279,4 @@ footer {
 .static-page-card p {
     margin-bottom: 10px;
     line-height: 1.7;
-}
-.footer-content {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    gap: 10px;              
-}
-
-.footer-links {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.footer-links a {
-    color: #f8f9fa;
-    text-decoration: none;
-}
-
-.footer-links a:hover {
-    text-decoration: underline;
 }
