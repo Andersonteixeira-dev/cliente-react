@@ -13,12 +13,17 @@ function App() {
             </header>
 
             <main className="container">
-                <Outlet /> {/* O conteúdo da rota atual (HomePage, etc.) será inserido aqui */}
+                <Outlet /> 
             </main>
 
             <footer>
                 <div className="container">
                     <p>&copy; 2025 eConcursou. Todos os direitos reservados.</p>
+                <div className="footer-links">
+                    <Link to="/sobre">Sobre Nós</Link>
+                    <span>|</span>
+                    <Link to="/politica-de-privacidade">Política de Privacidade</Link>
+                </div>
                 </div>
             </footer>
         </>

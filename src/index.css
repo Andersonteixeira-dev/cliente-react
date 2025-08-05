@@ -244,3 +244,36 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.static-page-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.static-page-card h1, .static-page-card h2 {
+    margin-bottom: 15px;
+}
+.static-page-card p {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+/* Em src/index.css */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.footer-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.footer-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    text-decoration: underline;
+}

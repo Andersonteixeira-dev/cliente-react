@@ -10,6 +10,8 @@ import LoginPage from './pages/LoginPage.jsx';
 import AdminPage from './pages/AdminPage.jsx'; 
 import DetalhesPage from './pages/DetalhesPage.jsx';
 import RotaProtegida from './components/RotaProtegida.jsx'; 
+import SobrePage from './pages/SobrePage.jsx'; 
+import PoliticaPrivacidadePage from './pages/PoliticaPrivacidadePage.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -21,6 +23,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route index element={<HomePage />} /> 
            <Route path="concursos/:slug" element={<DetalhesPage />} />          
           <Route path="login" element={<LoginPage />} /> 
+           <Route path="sobre" element={<SobrePage />} /> 
+            <Route path="politica-de-privacidade" element={<PoliticaPrivacidadePage />} /> 
           <Route 
             path="admin" 
             element={
