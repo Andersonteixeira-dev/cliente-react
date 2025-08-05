@@ -83,45 +83,45 @@ function HomePage() {
                         </div>
                         <div className="regiao">
                             <strong>Sudeste:</strong>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'sp' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('sp'); }}>SP</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'rj' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('rj'); }}>RJ</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'mg' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('mg'); }}>MG</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'es' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('es'); }}>ES</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'sp' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('sp'); }}>SP</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'rj' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('rj'); }}>RJ</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'mg' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('mg'); }}>MG</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'es' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('es'); }}>ES</a>
                         </div>
                         <div className="regiao">
                             <strong>Sul:</strong>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'pr' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('pr'); }}>PR</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'sc' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('sc'); }}>SC</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'rs' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('rs'); }}>RS</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'pr' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('pr'); }}>PR</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'sc' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('sc'); }}>SC</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'rs' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('rs'); }}>RS</a>
                         </div>
                          <div className="regiao">
                             <strong>Nordeste:</strong>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'al' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('al'); }}>AL</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ba' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ba'); }}>BA</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ce' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ce'); }}>CE</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ma' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ma'); }}>MA</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'pb' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('pb'); }}>PB</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'pe' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('pe'); }}>PE</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'pi' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('pi'); }}>PI</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'rn' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('rn'); }}>RN</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'se' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('se'); }}>SE</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'al' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('al'); }}>AL</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ba' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ba'); }}>BA</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ce' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ce'); }}>CE</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ma' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ma'); }}>MA</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'pb' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('pb'); }}>PB</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'pe' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('pe'); }}>PE</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'pi' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('pi'); }}>PI</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'rn' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('rn'); }}>RN</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'se' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('se'); }}>SE</a>
                         </div>
                          <div className="regiao">
                             <strong>Norte:</strong>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ac' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ac'); }}>AC</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ap' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ap'); }}>AP</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'am' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('am'); }}>AM</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'pa' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('pa'); }}>PA</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ro' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ro'); }}>RO</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'rr' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('rr'); }}>RR</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'to' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('to'); }}>TO</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ac' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ac'); }}>AC</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ap' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ap'); }}>AP</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'am' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('am'); }}>AM</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'pa' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('pa'); }}>PA</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ro' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ro'); }}>RO</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'rr' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('rr'); }}>RR</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'to' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('to'); }}>TO</a>
                         </div>
                         <div className="regiao">
                             <strong>Centro-Oeste:</strong>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'df' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('df'); }}>DF</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'go' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('go'); }}>GO</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'mt' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('mt'); }}>MT</a>
-                            <a href="#" className={`filtro-btn ${filtroAtivo === 'ms' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); setFiltroAtivo('ms'); }}>MS</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'df' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('df'); }}>DF</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'go' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('go'); }}>GO</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'mt' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('mt'); }}>MT</a>
+                            <a href="#" className={`filtro-btn notranslate ${filtroAtivo === 'ms' ? 'active' : ''}`} translate="no" onClick={(e) => { e.preventDefault(); setFiltroAtivo('ms'); }}>MS</a>
                         </div>
                     </div>
                 </section>
