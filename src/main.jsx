@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HeadProvider } from 'react-head';
+import NoticiasPage from './pages/NoticiasPage.jsx'; 
+import ArtigoPage from './pages/ArtigoPage.jsx'; 
 
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -21,10 +23,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>        
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} /> 
-           <Route path="concursos/:slug" element={<DetalhesPage />} />          
+          <Route path="noticias" element={<NoticiasPage />} />        
+          <Route path="noticias/:slug" element={<ArtigoPage />} />   
+          <Route path="concursos/:slug" element={<DetalhesPage />} />          
           <Route path="login" element={<LoginPage />} /> 
-           <Route path="sobre" element={<SobrePage />} /> 
-            <Route path="politica-de-privacidade" element={<PoliticaPrivacidadePage />} /> 
+          <Route path="sobre" element={<SobrePage />} /> 
+          <Route path="politica-de-privacidade" element={<PoliticaPrivacidadePage />} /> 
           <Route 
             path="admin" 
             element={
