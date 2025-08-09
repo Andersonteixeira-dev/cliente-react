@@ -82,6 +82,8 @@ function DetalhesPage() {
         <>
             <Title>{`Concurso ${concurso.instituicao} | eConcursou`}</Title>
             <Meta name="description" content={`Detalhes sobre o concurso para ${concurso.instituicao}. Vagas para ${concurso.cargos || 'diversos cargos'}.`} />
+             <div className="container">
+                <div className="static-page-card">
             <div className="concurso-detalhe-card">
                 <div className="card-header">
                     <h4>{concurso.instituicao}</h4>
@@ -137,6 +139,8 @@ function DetalhesPage() {
                     )}
                 </div>
             </div>
+             </div>
+             </div>
         </>
     );
 }

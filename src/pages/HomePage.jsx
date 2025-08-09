@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Title, Meta } from 'react-head';
 import ConcursoCard from '../components/ConcursoCard';
 import { estadosMap } from '../utils/estados';
+import UltimasNoticias from '../components/UltimasNoticias'; 
+import SidebarNoticias from '../components/SidebarNoticias';
 
 function HomePage() {
     const [concursos, setConcursos] = useState([]);
@@ -66,7 +68,7 @@ function HomePage() {
             <Title>eConcursou - Concursos Públicos Abertos e Previstos</Title>
             <Meta name="description" content="Encontre os últimos editais de concursos públicos abertos, previstos e em andamento em todo o Brasil." />
 
-            <div>
+                <div className="container-wide">
                 <section className="filtro-estados">
                     <input
                         type="text"
@@ -125,18 +127,19 @@ function HomePage() {
                         </div>
                     </div>
                 </section>
-
-                <div className="lista-concursos">
+                 <div className="homepage-grid">
+                <main className="concursos-coluna">
+                    <div className="lista-concursos">                                 
                     {loading ? <p>Carregando...</p> : (
                         <>                       
                             {nacionais.length > 0 && (
-                                <section className="regiao-section"><h2>Nacional</h2>{nacionais.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
+                                <section className="regiao-section"><h2 className="section-title">Nacional</h2>{nacionais.map(c => <ConcursoCard key={c._id} concurso={c} />)}</section>
                             )}
                             {todasAsSiglasOrdenadas.map(sigla => (
                              // Verifica se realmente existem concursos para essa sigla antes de criar a seção
                                concursosPorEstado[sigla] && (
                                  <section key={sigla} className="regiao-section">
-                                     <h2>{estadosMap[sigla] || sigla}</h2>
+                                     <h2 className="section-title">{estadosMap[sigla] || sigla}</h2>
                                      {concursosPorEstado[sigla]
                                      .sort((a, b) => a.instituicao.localeCompare(b.instituicao))
                                      .map(c => <ConcursoCard key={c._id} concurso={c} />)}
@@ -149,6 +152,11 @@ function HomePage() {
                           <p className="aviso-lista-vazia">Nenhum concurso encontrado para os filtros selecionados.</p>
                        )}
                 </div>
+            </main>
+            <aside className="sidebar-noticias">
+                    <UltimasNoticias />
+            </aside>
+            </div>
             </div>
         </>
     );

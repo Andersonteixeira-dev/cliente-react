@@ -33,21 +33,27 @@ function ArtigoPage() {
     if (loading) return <p>Carregando matéria...</p>;
     if (!post) return <h1>Notícia não encontrada.</h1>;
 
-    return (
+        return (
         <>
             <Title>{`${post.titulo} | eConcursou`}</Title>
             <Meta name="description" content={post.resumo} />
-
-            <article className="artigo-completo">
-                {post.imagemCapa && <img src={post.imagemCapa} alt={post.titulo} className="artigo-imagem-capa" />}
-                <h1>{post.titulo}</h1>
-                <span className="artigo-data">Publicado em: {formatarData(post.dataPublicacao)}</span>
-                <div 
-                    className="artigo-conteudo"
-                    dangerouslySetInnerHTML={{ __html: post.conteudo }}
-                />
-                <Link to="/noticias" className="btn-voltar">Voltar para Notícias</Link>
-            </article>
+            
+            <div className="container">                
+                <div className="static-page-card">
+                    <article className="artigo-completo">
+                        {post.imagemCapa && <img src={post.imagemCapa} alt={post.titulo} className="artigo-imagem-capa" />}
+                        <h1>{post.titulo}</h1>
+                        <span className="artigo-data">Publicado em: {formatarData(post.dataPublicacao)}</span>
+                        <div 
+                            className="artigo-conteudo"
+                            dangerouslySetInnerHTML={{ __html: post.conteudo }}
+                        />
+                        <Link to="/noticias" className="btn-voltar" style={{ marginTop: '30px' }}>
+                            &larr; Voltar para Notícias
+                        </Link>
+                    </article>
+                </div>
+            </div>
         </>
     );
 }

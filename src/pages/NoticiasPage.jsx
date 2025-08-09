@@ -33,22 +33,27 @@ function NoticiasPage() {
         <>
             <Title>Notícias sobre Concursos Públicos | eConcursou</Title>
             <Meta name="description" content="Acompanhe as últimas notícias, dicas e análises sobre o mundo dos concursos públicos no Brasil." />
-
-            <div className="lista-noticias">
+            <div className="container">
                 <h1>Últimas Notícias</h1>
                 {loading ? <p>Carregando notícias...</p> : (
-                    posts.map(post => (
-                        <article key={post._id} className="noticia-card">
+                    <div className="noticias-page-grid">
+                    {posts.map(post => (
+                        <Link key={post._id} to={`/noticias/${post.slug}`} className="card-link-wrapper">
+                        <article className="noticia-card">
                             {post.imagemCapa && <img src={post.imagemCapa} alt={post.titulo} className="noticia-imagem-capa" />}
                             <div className="noticia-conteudo">
                                 <span className="noticia-data">{formatarData(post.dataPublicacao)}</span>
                                 <h2>{post.titulo}</h2>
-                                <p>{post.resumo}</p>
-                                <Link to={`/noticias/${post.slug}`} className="btn-ler-mais">Ler Matéria Completa</Link>
+                                <p>{post.resumo}</p>                                
                             </div>
                         </article>
-                    ))
-                )}
+                        </Link>
+                    ))}
+                    </div>
+                )} 
+                  {!loading && posts.length === 0 && (
+                    <p className="aviso-lista-vazia">Nenhuma notícia publicada ainda.</p>
+                )}          
             </div>
         </>
     );

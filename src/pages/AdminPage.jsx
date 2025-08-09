@@ -40,21 +40,21 @@ function AdminPage() {
         <>
             <Title>Painel de Administração | eConcursou</Title>
             <Meta name="robots" content="noindex, nofollow" />
-            
+            <div className="container">
             <div>
                 <button onClick={handleLogout} className="btn-logout" style={{ float: 'right' }}>
                     Sair <i className="fas fa-sign-out-alt"></i>
                 </button>
                 <h1>Painel de Administração</h1>
 
-                <div style={tabStyles}>
+                <div className="admin-tabs">
                     <button 
-                        style={abaAtiva === 'concursos' ? activeTabButtonStyle : tabButtonStyle} 
+                        className={abaAtiva === 'concursos' ? 'tab-button active' : 'tab-button'}  
                         onClick={() => setAbaAtiva('concursos')}>
                         Gerenciar Concursos
                     </button>
                     <button 
-                        style={abaAtiva === 'noticias' ? activeTabButtonStyle : tabButtonStyle} 
+                        className={abaAtiva === 'noticias' ? 'tab-button active' : 'tab-button'}  
                         onClick={() => setAbaAtiva('noticias')}>
                         Gerenciar Notícias
                     </button>
@@ -64,6 +64,7 @@ function AdminPage() {
                     {abaAtiva === 'concursos' && <GerenciarConcursos />}
                     {abaAtiva === 'noticias' && <GerenciarNoticias />}
                 </div>
+            </div>
             </div>
         </>
     );

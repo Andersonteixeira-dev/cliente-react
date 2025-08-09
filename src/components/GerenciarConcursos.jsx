@@ -199,6 +199,7 @@ function GerenciarConcursos() {
                                 menubar: false,
                                 plugins: [ 'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount' ],
                                 toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | removeformat | help',
+                                forced_root_block: 'p',
                             }} 
                             />
                         </div>

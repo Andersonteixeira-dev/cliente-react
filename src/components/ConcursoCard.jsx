@@ -48,10 +48,12 @@ function ConcursoCard({ concurso }) {
          <Link to={`/concursos/${concurso.slug}`} className="card-link-wrapper"> 
             <article className={`concurso-card ${statusInfo.classe}`}>
                 <div className="card-header">
-                    <h4>{concurso.instituicao}</h4>
+                    <h4>
+                        {concurso.instituicao}
+                        {concurso.estado && <span className="estado-sigla-card">({concurso.estado.toUpperCase()})</span>}
+                    </h4>
                     <span className={`status ${statusInfo.classe}`}>{statusInfo.texto}</span>
                 </div>
-
                 <div className="card-body"> 
                     <div className="info-coluna">
                         <div className="info-item">

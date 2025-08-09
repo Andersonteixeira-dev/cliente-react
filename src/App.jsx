@@ -10,7 +10,7 @@ function App() {
             <Meta name="description" content="Acompanhe os principais concursos públicos abertos e previstos em todo o Brasil." />
 
             <header>
-                <div className="container">
+                <div className="container-wide header-container">
                     <Link to="/" className="logo-container">
                         <img src={logoImage} alt="Logo eConcursou" className="logo-image" />
                         <span className="logo-text">eConcursou</span>
@@ -32,7 +32,7 @@ function App() {
                 </div>
             </header>
 
-            <main className="container">
+            <main>
                 <Outlet /> 
             </main>
 

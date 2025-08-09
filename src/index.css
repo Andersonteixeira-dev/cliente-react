@@ -1,33 +1,158 @@
-/* ============================================== */
-/* === ARQUIVO CSS FINAL E CONSOLIDADO - eConcursou === */
-/* ============================================== */
+/* ====================================================== */
+/* === ARQUIVO CSS DEFINITIVO - eConcursou - 09/08/2025 === */
+/* ====================================================== */
 
-/* --- Reset Básico e Configurações Globais --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; }
-.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-a { text-decoration: none; color: #007bff; }
+/* --- 1. Reset Básico e Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* --- Cabeçalho e Logo --- */
-header { background-color: #ffffff; padding: 1rem 0; border-bottom: 1px solid #ddd; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
-header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-image { height: 40px; width: auto; }
-.logo-text { font-size: 1.8rem; font-weight: bold; color: #0056b3; }
-header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
 
-/* --- Filtros --- */
-.filtro-estados { background-color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
-.search-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;}
-.mapa-brasil { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-.mapa-brasil .regiao { display: flex; align-items: center; gap: 8px; background-color: #f8f9fa; padding: 8px 12px; border-radius: 6px; flex-wrap: wrap; }
-.mapa-brasil .regiao strong { color: #333; font-weight: 500; }
-.filtro-btn { padding: 6px 10px; color: #007bff; font-weight: bold; border-radius: 4px; border: 1px solid #007bff; transition: all 0.3s ease; }
-.filtro-btn:hover { background-color: #007bff; color: #fff; }
-.filtro-btn.active { background-color: #0056b3; border-color: #0056b3; color: #fff; }
+a {
+    text-decoration: none;
+    color: #007bff;
+}
 
-/* --- Títulos de Seção (Nacional, São Paulo, etc.) --- */
-.regiao-section h2 {
+/* --- 2. Estrutura de Containers --- */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-wide {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- 3. Cabeçalho, Logo e Navegação --- */
+header {
+    background-color: #ffffff;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que o menu quebre a linha em telas médias */
+    gap: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-image {
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    color: #343a40;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #f1f3f5;
+}
+
+.nav-link.active {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+/* --- 4. Filtros --- */
+.filtro-estados {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.mapa-brasil {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.mapa-brasil .regiao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filtro-btn.active {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+}
+
+/* --- 5. Layout Principal da HomePage --- */
+.homepage-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- 6. Títulos de Seção Padronizados --- */
+.section-title {
     font-size: 1.4rem;
     color: #343a40;
     margin-bottom: 20px;
@@ -35,35 +160,35 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
     border-bottom: 2px solid #007bff;
 }
 
-/* --- Mensagem de Lista Vazia --- */
-.aviso-lista-vazia { text-align: center; padding: 40px 20px; background-color: #fff; border-radius: 8px; }
+/* --- 7. Cards de Concurso --- */
+.aviso-lista-vazia {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
 
-/* --- CARDS DE CONCURSO (SEÇÃO ATUALIZADA E FINAL) --- */
-
-/* Wrapper do Link: remove a aparência padrão de link */
 .card-link-wrapper {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
-/* Estilo principal do card */
 .concurso-card {
     background-color: #ffffff;
     border: 1px solid #dee2e6;
-    border-left: 5px solid #0d6efd; /* Destaque azul na lateral */
+    border-left: 5px solid #0d6efd;
     border-radius: 8px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .concurso-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Cabeçalho do card */
 .concurso-card .card-header {
     padding: 15px 20px;
     border-bottom: 1px solid #e9ecef;
@@ -78,12 +203,18 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
     margin: 0;
 }
 
-/* Corpo do Card com layout de 2 colunas */
+.estado-sigla-card {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-left: 8px;
+}
+
 .concurso-card .card-body {
     padding: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
-    gap: 12px 25px; /* Espaçamento vertical e horizontal */
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 25px;
     font-size: 0.9rem;
 }
 
@@ -110,7 +241,6 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
     color: #495057;
 }
 
-/* Faz o campo "Cargos" ocupar as duas colunas */
 .info-item-full {
     grid-column: 1 / -1;
 }
@@ -120,26 +250,125 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
     font-weight: 500;
 }
 
-/* Estilos para os Status Tags */
-.status { padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; color: #fff; white-space: nowrap; }
+.status {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
 .status.aberto { background-color: #198754; }
 .status.encerrado { background-color: #6c7d87; }
 .status.previsto { background-color: #ffc107; color: #333; }
 
-/* Estilos para Cards Encerrados */
 .concurso-card.encerrado {
-    border-left-color: #6c7d87; /* Muda a cor da tarja para cinza */
+    border-left-color: #6c7d87;
     opacity: 0.75;
 }
 
 .concurso-card.encerrado:hover {
-    transform: none; /* Remove o efeito de 'levantar' */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     cursor: default;
 }
 
-/* --- ESTILOS PARA PÁGINA DE DETALHES --- */
-.concurso-detalhe-card { background-color: #fff; border-radius: 8px; padding: 25px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+/* --- 8. Seção de Notícias --- */
+.noticias-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.noticia-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.noticia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+.noticia-imagem-capa {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.noticia-conteudo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+.noticia-data {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+.noticia-conteudo h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+.noticia-conteudo p {
+    flex-grow: 1; 
+}
+
+/* Sidebar de Notícias */
+.sidebar-noticias-grid {
+    display: flex;
+    flex-direction: column;
+}
+.noticia-card-sidebar {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+.noticia-card-sidebar:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.noticia-card-sidebar .noticia-imagem-capa {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+.noticia-card-sidebar .noticia-conteudo {
+    padding: 15px;
+}
+.noticia-card-sidebar .noticia-conteudo h3,
+.noticia-card-sidebar .noticia-conteudo p {
+    color: #343a40; /* Corrigindo a cor azul */
+}
+.noticia-card-sidebar h3 {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    margin-top: 5px;
+}
+.sidebar-noticias .card-link-wrapper {
+    display: block; 
+    margin-bottom: 15px; 
+}
+.sidebar-noticias .card-link-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+/* --- 9. Páginas Estáticas (Detalhes, Artigo, Sobre) --- */
+.static-page-card {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 .info-item-detalhe {
     display: flex;
     align-items: flex-start;
@@ -157,21 +386,41 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
     font-weight: 600;
     color: #333;
 }
-.resumo-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
-.resumo-section h3 { margin-bottom: 15px; }
-.resumo-section p { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
+.resumo-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.resumo-section h3 {
+    margin-bottom: 15px;
+}
+.resumo-formatado, .artigo-conteudo {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+.resumo-formatado p, .artigo-conteudo p,
+.resumo-formatado ul, .artigo-conteudo ul {
+    margin-bottom: 20px;
+}
+.artigo-imagem-capa {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
 .lista-links-publica {
     list-style: none;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas menores */
-    gap: 10px; /* Espaço entre os botões */
+    flex-wrap: wrap;
+    gap: 10px;
 }
-
+/* --- ESTILOS PARA PÁGINA DE DETALHES --- */
 .btn-detalhes-principal {
     display: inline-block;
-    background-color: #198754; /* Verde para uma ação positiva */
-    color: #fff;
+    background-color: #198754; /* Verde para ação principal */
+    color: #ffffff !important; /* O !important garante que esta cor sobrescreva o azul padrão dos links */
     padding: 12px 24px;
     border-radius: 6px;
     font-size: 1rem;
@@ -184,18 +433,15 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 
 .btn-detalhes-principal:hover {
     background-color: #157347; /* Verde mais escuro no hover */
-    transform: translateY(-2px); /* Efeito sutil de "levantar" */
+    transform: translateY(-2px);
+    color: #ffffff; /* Garante que o texto continue branco no hover */
 }
 
 .btn-detalhes-principal i {
-    margin-right: 8px; /* Espaço entre o ícone do PDF e o texto */
+    margin-right: 8px;
 }
-.resumo-formatado {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-/* --- ESTILOS GERAIS DE ADMIN E OUTROS --- */
-/* (Estilos que já tínhamos, agora consolidados e limpos) */
+
+/* --- 10. Painel de Administração --- */
 .admin-body { background-color: #e9ecef; }
 .admin-container { max-width: 800px; margin: 30px auto; padding: 20px; }
 .form-section, .gerenciamento-section { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
@@ -224,98 +470,79 @@ header nav { /* Vazio por enquanto, mas pronto para o futuro */ }
 .btn-add-link { padding: 0 15px; background: #198754; color: white; border: none; border-radius: 4px; cursor: pointer; }
 .btn-logout { float: right; margin-bottom: 20px; background: #6c757d; color: white; padding: 8px 15px; border-radius: 5px; border: none; cursor: pointer; }
 .btn-logout:hover { background: #5a6268; }
-/* --- Rodapé --- */
+/* --- ESTILOS PARA ABAS DO PAINEL ADMIN --- */
+.admin-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #6c757d;
+    background: none;
+    
+    /* A MÁGICA: Borda transparente para manter o alinhamento */
+    border: 2px solid transparent; 
+    margin-bottom: -2px; /* Puxa o botão para baixo para a borda ativa cobrir a principal */
+}
+
+.tab-button.active {
+    color: #0d6efd;
+    border-bottom-color: #0d6efd; /* Apenas muda a cor da borda inferior quando ativo */
+}
+/* --- 11. Rodapé --- */
 footer {
-    text-align: center; 
-    padding: 25px 20px; 
+    text-align: center;
+    padding: 25px 20px;
     margin-top: 40px;
     background-color: #343a40;
     color: #f8f9fa;
 }
-
 .footer-content {
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    gap: 10px;              
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
-
 .footer-links {
     display: flex;
-    gap: 15px; 
+    gap: 15px;
     align-items: center;
 }
-
 .footer-links a {
     color: #f8f9fa;
     text-decoration: none;
-    transition: text-decoration 0.2s;
 }
-
 .footer-links a:hover {
     text-decoration: underline;
 }
-/* --- RESPONSIVIDADE FINAL --- */
+
+/* ============================================== */
+/* === 12. RESPONSIVIDADE FINAL PARA TODO O SITE === */
+/* ============================================== */
+
+@media (max-width: 992px) {
+    .container-wide, header .container-wide { max-width: 100%; }
+    .homepage-grid { grid-template-columns: 1fr; }
+    .sidebar-noticias { margin-top: 40px; }
+    .noticias-page-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 768px) {
-    header .container { flex-direction: column; gap: 15px; padding-top: 15px; padding-bottom: 15px; }
-    header h1, .logo-text { font-size: 1.5rem; }
-    .mapa-brasil .regiao { justify-content: center; }
-    .regiao-section h2 { font-size: 1.3rem; }
+    .header-container { flex-direction: column; }
+    .logo-text { font-size: 1.6rem; }
     .concurso-card .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    /* Desfaz as 2 colunas do card no mobile */
-    .concurso-card .card-body {
-        grid-template-columns: 1fr;
+    .concurso-card .card-body { grid-template-columns: 1fr; }
+    .noticia-card .noticia-imagem-capa { height: 180px; }
+    .concurso-detalhe-card .card-body-detalhes {
+        display: block; 
+    }
+    .info-item-detalhe {
+        justify-content: flex-start;
     }
 }
-.static-page-card {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.static-page-card h1, .static-page-card h2 {
-    margin-bottom: 15px;
-}
-.static-page-card p {
-    margin-bottom: 10px;
-    line-height: 1.7;
-}
-/* --- ESTILOS PARA O BLOG / NOTÍCIAS --- */
-.noticia-card { display: flex; gap: 20px; background: #fff; margin-bottom: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; }
-.noticia-imagem-capa { width: 300px; height: 200px; object-fit: cover; }
-.noticia-conteudo { padding: 20px; }
-.noticia-data { font-size: 0.8rem; color: #6c757d; margin-bottom: 5px; display: block; }
-.noticia-conteudo h2 { font-size: 1.5rem; margin-bottom: 10px; }
-.noticia-conteudo p { margin-bottom: 15px; }
-.btn-ler-mais { background: #0d6efd; color: #fff; padding: 8px 15px; border-radius: 5px; text-decoration: none; display: inline-block; }
 
-.artigo-completo h1 { font-size: 2.5rem; margin-bottom: 10px; }
-.artigo-imagem-capa { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
-.artigo-data { display: block; color: #6c757d; margin-bottom: 30px; }
-.artigo-conteudo { line-height: 1.8; font-size: 1.1rem; }
-.artigo-conteudo p, .artigo-conteudo ul, .artigo-conteudo h3 { margin-bottom: 20px; }
-.btn-voltar { display: inline-block; margin-top: 40px; }
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 10px; /* Espaçamento entre os links */
-}
-
-.nav-link {
-    padding: 8px 16px;
-    color: #343a40;
-    font-weight: 500;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-}
-
-.nav-link:hover {
-    background-color: #f1f3f5;
-}
-
-/* A classe 'active' é adicionada automaticamente pelo NavLink para a página atual */
-.nav-link.active {
-    background-color: #0d6efd;
-    color: #ffffff;
-}
