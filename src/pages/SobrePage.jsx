@@ -6,7 +6,7 @@ function SobrePage() {
         <>
             <Title>Sobre Nós | eConcursou</Title>
             <Meta name="description" content="Saiba mais sobre a missão e a visão do eConcursou, o seu portal de concursos públicos." />
-
+            <div className="container">
             <div className="static-page-card">
                 <h1>Sobre o eConcursou</h1>
                 <p>
@@ -21,6 +21,7 @@ function SobrePage() {
                 <p>
                     Boa sorte!
                 </p>
+            </div>
             </div>
         </>
     );
