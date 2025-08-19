@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Title, Meta } from 'react-head';
 
-function verificarStatus(dataInicio, dataFim) {
+function verificarStatus(concurso) {    
+    if (concurso.statusManual && concurso.statusManual.trim() !== '') {        
+        return { texto: concurso.statusManual, classe: concurso.statusManual.toLowerCase() };
+    }
+    
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
-    // Regra 1: Se tem data final e ela já passou, está Encerrado.
-    if (dataFim) {
-        const fim = new Date(dataFim + 'T00:00:00');
+    if (concurso.dataFimInscricao) {
+        const fim = new Date(concurso.dataFimInscricao + 'T00:00:00');
         if (!isNaN(fim.getTime()) && hoje > fim) {
             return { texto: 'Encerrado', classe: 'encerrado' };
         }
     }
-
-    // Regra 2: Se tem data de início e ela ainda não chegou, está Previsto.
-    if (dataInicio) {
-        const inicio = new Date(dataInicio + 'T00:00:00');
+    if (concurso.dataInicioInscricao) {
+        const inicio = new Date(concurso.dataInicioInscricao + 'T00:00:00');
         if (!isNaN(inicio.getTime()) && hoje < inicio) {
             return { texto: 'Previsto', classe: 'previsto' };
         }
     }
-
-    // Regra 3: Se não se encaixa em nenhuma das anteriores, está Aberto.
+    
     return { texto: 'Aberto', classe: 'aberto' };
 }
 
@@ -77,7 +77,7 @@ function DetalhesPage() {
         );
     }
 
-    const statusInfo = verificarStatus(concurso.dataInicioInscricao, concurso.dataFimInscricao);
+    const statusInfo = verificarStatus(concurso);
     return (
         <>
             <Title>{`Concurso ${concurso.instituicao} | eConcursou`}</Title>

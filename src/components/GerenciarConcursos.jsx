@@ -12,7 +12,7 @@ function formatarData(dataString) {
 const initialState = {
     instituicao: '', vagas: '', escolaridade: [], ambito: 'Municipal',
     salario: '', dataInicioInscricao: '', dataFimInscricao: '', textoInscricao: '', 
-    estado: '', resumo: '', cargos: '', links: []
+    estado: '', resumo: '', cargos: '', links: [], statusManual: ''
 };
 
 function GerenciarConcursos() {
@@ -58,13 +58,21 @@ function GerenciarConcursos() {
     }, [formData.dataInicioInscricao, formData.dataFimInscricao, textoEditadoManualmente]);
 
     const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        if (id === 'textoInscricao') setTextoEditadoManualmente(true);
-        const novosDados = { ...formData, [id]: value };
-        if (id === 'ambito' && value === 'Nacional') novosDados.estado = '';
-        if (id === 'dataInicioInscricao' || id === 'dataFimInscricao') setTextoEditadoManualmente(false);
-        setFormData(novosDados);
-    };
+    const { id, value, type, checked } = e.target;    
+    const valorFinal = type === 'checkbox' ? checked : value;
+    if (id === 'textoInscricao') {
+        setTextoEditadoManualmente(true);
+    }
+    const novosDados = { ...formData, [id]: valorFinal };
+    if (id === 'ambito' && value === 'Nacional') {
+        novosDados.estado = '';
+    }
+    if (id === 'dataInicioInscricao' || id === 'dataFimInscricao') {
+        setTextoEditadoManualmente(false);
+    }
+    
+    setFormData(novosDados);
+};
 
     const handleEscolaridadeChange = (e) => {
         const { value, checked } = e.target;
@@ -95,7 +103,8 @@ function GerenciarConcursos() {
             dataFimInscricao: concurso.dataFimInscricao ? concurso.dataFimInscricao.substring(0, 10) : '',
             estado: concurso.estado || '', resumo: concurso.resumo || '', 
             cargos: concurso.cargos || '', links: concurso.links || [],
-            textoInscricao: concurso.textoInscricao || ''
+            textoInscricao: concurso.textoInscricao || '',
+            statusManual: concurso.statusManual || ''
         });
         setTextoEditadoManualmente(true);
         window.scrollTo(0, 0);
@@ -114,7 +123,7 @@ function GerenciarConcursos() {
     };
 
     const handleSalvar = async (event) => {
-        event.preventDefault();         
+        event.preventDefault();        
         const url = editingId ? `${import.meta.env.VITE_API_URL}/api/concursos/${editingId}` : `${import.meta.env.VITE_API_URL}/api/concursos`;
         const method = editingId ? 'PUT' : 'POST';
         try {
@@ -188,6 +197,17 @@ function GerenciarConcursos() {
                                 placeholder="Ex: Inscrições até 30/09/2025"
                             />
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="statusManual">Status Manual (ex: Suspenso, Cancelado)</label>
+                            <input
+                                type="text"
+                                id="statusManual"
+                                value={formData.statusManual || ''}
+                                onChange={handleInputChange}
+                                placeholder="Deixe em branco para status automático"
+                            />
+                        </div>                           
+
                         <div className="form-group">
                             <label htmlFor="resumo">Resumo do Concurso</label>
                             <Editor
