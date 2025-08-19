@@ -262,12 +262,17 @@ header nav ul {
 .status.encerrado { background-color: #6c7d87; }
 .status.previsto { background-color: #ffc107; color: #333; }
 .status.suspenso { background-color: #dc3545; }
+.status.cancelado { background-color: #dc3545; }
 
 .concurso-card.encerrado {
     border-left-color: #6c7d87;
     opacity: 0.75;
 }
 .concurso-card.suspenso { 
+    border-left-color: #6c7d87;
+    opacity: 0.75;
+}
+.concurso-card.cancelado { 
     border-left-color: #6c7d87;
     opacity: 0.75;
 }
@@ -278,6 +283,11 @@ header nav ul {
     cursor: default;
 }
 .concurso-card.suspenso:hover { 
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: default;
+}
+.concurso-card.cancelado:hover { 
     transform: none;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     cursor: default;
