@@ -1,23 +1,23 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export default function useSmartScrollRestoration(loading) {
+export default function useSmartScrollRestoration(loading, itemCount) {
   const location = useLocation();
+  const restored = useRef(false);
   
-  // Salva o scroll ao sair
+  // guarda scroll antes de sair da rota
   useEffect(() => {
     return () => {
-      sessionStorage.setItem(`scrollPos_${location.key}`, window.scrollY);
+      sessionStorage.setItem(`scrollPos_${location.pathname}`, window.scrollY);
     };
-  }, [location]);
-
-  // Restaura o scroll após os dados carregarem
+  }, [location.pathname]);
+  
+  // tenta restaurar scroll só quando não está carregando e a lista tem itens
   useEffect(() => {
-    if (!loading) {
-      const scroll = sessionStorage.getItem(`scrollPos_${location.key}`);
-      if (scroll !== null) {
-        window.scrollTo(0, Number(scroll));
-      }
+    if (!loading && itemCount > 0 && !restored.current) {
+      const scrollY = sessionStorage.getItem(`scrollPos_${location.pathname}`);
+      restored.current = true;
+      if (scrollY !== null) window.scrollTo(0, Number(scrollY));
     }
-  }, [loading, location]);
+  }, [loading, itemCount, location.pathname]);
 }

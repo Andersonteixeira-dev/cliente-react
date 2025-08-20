@@ -12,7 +12,7 @@ function HomePage() {
     const [filtroAtivo, setFiltroAtivo] = useState('todos');
     const [loading, setLoading] = useState(true);
 
-    useSmartScrollRestoration(loading);
+    useSmartScrollRestoration(loading, concursos.length);
 
     useEffect(() => {
         setLoading(true);
