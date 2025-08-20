@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HeadProvider } from 'react-head';
 import NoticiasPage from './pages/NoticiasPage.jsx'; 
-import ArtigoPage from './pages/ArtigoPage.jsx'; 
-
+import ArtigoPage from './pages/ArtigoPage.jsx';
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';

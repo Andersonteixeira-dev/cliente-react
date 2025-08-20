@@ -4,12 +4,15 @@ import ConcursoCard from '../components/ConcursoCard';
 import { estadosMap } from '../utils/estados';
 import UltimasNoticias from '../components/UltimasNoticias'; 
 import SidebarNoticias from '../components/SidebarNoticias';
+import useSmartScrollRestoration from '../hooks/useSmartScrollRestoration';
 
-function HomePage() {
+function HomePage() {    
     const [concursos, setConcursos] = useState([]);
     const [termoBusca, setTermoBusca] = useState('');
     const [filtroAtivo, setFiltroAtivo] = useState('todos');
     const [loading, setLoading] = useState(true);
+
+    useSmartScrollRestoration(loading);
 
     useEffect(() => {
         setLoading(true);

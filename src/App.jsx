@@ -3,7 +3,7 @@ import { Outlet, Link, NavLink } from 'react-router-dom';
 import { Title, Meta } from 'react-head'; 
 import logoImage from './assets/logoeConcursou.png';
 
-function App() {
+function App() {    
     return (
         <>
             <Title>eConcursou - Seu Portal de Concursos</Title>
