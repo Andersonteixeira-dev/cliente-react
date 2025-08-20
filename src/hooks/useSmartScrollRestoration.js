@@ -1,25 +1,23 @@
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function useSmartScrollRestoration(loading) {
-  const { key } = useLocation();
-  const scrollPositions = useRef({});
-
-  // Salva a posição ao sair da página
+  const location = useLocation();
+  
+  // Salva o scroll ao sair
   useEffect(() => {
     return () => {
-      scrollPositions.current[key] = window.scrollY;
+      sessionStorage.setItem(`scrollPos_${location.key}`, window.scrollY);
     };
-  }, [key]);
+  }, [location]);
 
-  // Restaura posição só quando loading fica falso (dados carregados)
+  // Restaura o scroll após os dados carregarem
   useEffect(() => {
     if (!loading) {
-      setTimeout(() => {
-        if (scrollPositions.current[key]) {
-          window.scrollTo(0, scrollPositions.current[key]);
-        }
-      }, 50);
+      const scroll = sessionStorage.getItem(`scrollPos_${location.key}`);
+      if (scroll !== null) {
+        window.scrollTo(0, Number(scroll));
+      }
     }
-  }, [loading, key]);
+  }, [loading, location]);
 }
