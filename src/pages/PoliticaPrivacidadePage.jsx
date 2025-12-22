@@ -9,7 +9,7 @@ function PoliticaPrivacidadePage() {
             <Meta name="robots" content="noindex" />
             <div className="container">
             <div className="static-page-card">
-                    <h1>Política de Privacidade</h1>
+                    <h1 className="notranslate" translate="no">Política de Privacidade</h1>
                     <p><strong>Última atualização:</strong> 04 de Agosto de 2025.</p>
                     
                     <p>
