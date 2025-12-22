@@ -44,7 +44,7 @@ function App() {
                         <span>|</span>
                         <Link to="/noticias">Notícias</Link>
                         <span>|</span>
-                        <Link to="/politica-de-privacidade">Política de Privacidade</Link>
+                        <Link to="/politica-de-privacidade" class="notranslate" translate="no">Política de Privacidade</Link>
                     </div>
                 </div>
             </footer>
@@ -53,4 +53,5 @@ function App() {
 }
 
 export default App;
+
 
