@@ -8,7 +8,7 @@ function SobrePage() {
             <Meta name="description" content="Saiba mais sobre a missão e a visão do eConcursou, o seu portal de concursos públicos." />
             <div className="container">
             <div className="static-page-card">
-                <h1>Sobre o eConcursou</h1>
+                <h1 className="notranslate" translate="no">Sobre o eConcursou</h1>
                 <p>
                     Bem-vindo ao eConcursou! Nossa missão é simplificar e centralizar a busca por oportunidades no serviço público em todo o Brasil.
                 </p>
