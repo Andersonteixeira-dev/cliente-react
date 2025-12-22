@@ -13,7 +13,7 @@ function App() {
                 <div className="container-wide header-container">
                     <Link to="/" className="logo-container">
                         <img src={logoImage} alt="Logo eConcursou" className="logo-image" />
-                        <span className="logo-text">eConcursou</span>
+                        <span className="logo-text notranslate" translate="no">eConcursou</span>
                     </Link>
                     <nav>
                         <ul>
@@ -53,3 +53,4 @@ function App() {
 }
 
 export default App;
+
